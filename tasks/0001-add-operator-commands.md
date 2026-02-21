@@ -1,6 +1,6 @@
 ---
 kind: task
-name: add-operator-commands
+name: 0001-add-operator-commands
 status: done
 agent:
 created: 2026-02-21

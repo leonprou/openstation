@@ -1,7 +1,7 @@
 ---
 kind: task
-name: research-obsidian-plugin-api
-status: ready
+name: 0003-research-obsidian-plugin-api
+status: done
 agent: researcher
 created: 2026-02-21
 ---

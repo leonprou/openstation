@@ -1,5 +1,6 @@
 ---
-description: List all tasks with status, agent, and dates. Supports filters via $ARGUMENTS (e.g., status:ready, agent:researcher).
+name: agent-station.list
+description: List all tasks with status, agent, and dates. Supports filters via $ARGUMENTS (e.g., status:ready, agent:researcher). Use when user asks "what tasks exist", "show tasks", "task status", or wants a status overview.
 ---
 
 # List Tasks
@@ -23,8 +24,10 @@ If no arguments provided, show all tasks.
 2. Parse YAML frontmatter from each file.
 3. Apply any filters from `$ARGUMENTS`.
 4. Display a markdown table with columns:
-   | Task | Status | Agent | Created |
-5. Sort by `created` date (oldest first).
+   | ID | Task | Status | Agent | Created |
+   The ID column shows the 4-digit numeric prefix extracted from the
+   filename (e.g., `0003`).
+5. Sort by ID (ascending) as primary sort.
 6. Below the table, show summary counts:
    ```
    Total: N | backlog: N | ready: N | in-progress: N | done: N | failed: N

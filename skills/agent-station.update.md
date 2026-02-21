@@ -1,5 +1,6 @@
 ---
-description: Update task frontmatter fields. $ARGUMENTS = <task-name> field:value [...].
+name: agent-station.update
+description: Update task frontmatter fields. $ARGUMENTS = <task-name> field:value [...]. Use when user says "update task", "change status", "assign agent", or wants to modify task metadata.
 ---
 
 # Update Task
@@ -11,14 +12,20 @@ Modify frontmatter fields on an existing task.
 `$ARGUMENTS` — the task name followed by one or more `field:value`
 pairs separated by spaces.
 
-Example: `research-obsidian-plugin-api status:ready agent:researcher`
+Example: `0003-research-obsidian-plugin-api status:ready agent:researcher`
+
+The task name can be either the full ID-prefixed name (e.g.,
+`0003-research-obsidian-plugin-api`) or just the slug (e.g.,
+`research-obsidian-plugin-api`).
 
 ## Procedure
 
 1. Parse the task name (first argument) and field:value pairs from
    `$ARGUMENTS`.
-2. Verify `tasks/<task-name>.md` exists. If not, report an error and
-   list available tasks.
+2. Locate the task file:
+   - Try exact match: `tasks/<task-name>.md`
+   - If not found, try glob fallback: `tasks/*-<task-name>.md`
+   - If still not found, report an error and list available tasks.
 3. Read the current frontmatter.
 4. Validate each field:value pair:
    - `status` must be one of: backlog, ready, in-progress, done, failed

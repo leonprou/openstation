@@ -5,7 +5,7 @@ defines the schema for each entity type.
 
 ## Task Spec
 
-**Location**: `tasks/<task-name>.md`
+**Location**: `tasks/<NNNN-task-name>.md`
 **Discriminator**: `kind: task`
 
 ### Frontmatter Schema
@@ -13,7 +13,7 @@ defines the schema for each entity type.
 | Field     | Type   | Required | Values / Description                              |
 |-----------|--------|----------|---------------------------------------------------|
 | `kind`    | string | yes      | `task`                                             |
-| `name`    | string | yes      | Kebab-case identifier (matches filename sans `.md`) |
+| `name`    | string | yes      | ID-prefixed kebab-case identifier (`NNNN-slug`, matches filename sans `.md`) |
 | `status`  | string | yes      | `backlog`, `ready`, `in-progress`, `done`, `failed` |
 | `agent`   | string | yes      | Name of the assigned agent                         |
 | `created` | date   | yes      | ISO date (YYYY-MM-DD)                              |
@@ -43,7 +43,7 @@ backlog → ready → in-progress → done
 ```yaml
 ---
 kind: task
-name: research-obsidian-plugin-api
+name: 0003-research-obsidian-plugin-api
 status: ready
 agent: researcher
 created: 2026-02-21
@@ -170,16 +170,16 @@ artifacts.
 
 ```
 tasks/
-├── research-obsidian-plugin-api.md
-└── research-obsidian-plugin-api-notes.md   # artifact
+├── 0003-research-obsidian-plugin-api.md
+└── 0003-research-obsidian-plugin-api-notes.md   # artifact
 ```
 
 ### Multi-artifact layout
 
 ```
 tasks/
-└── build-user-auth/
-    ├── build-user-auth.md                  # task spec
-    ├── research-notes.md                   # artifact
-    └── implementation-plan.md              # artifact
+└── 0006-build-user-auth/
+    ├── 0006-build-user-auth.md                  # task spec
+    ├── research-notes.md                        # artifact
+    └── implementation-plan.md                   # artifact
 ```

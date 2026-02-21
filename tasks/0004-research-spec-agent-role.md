@@ -1,7 +1,7 @@
 ---
 kind: task
-name: research-spec-agent-role
-status: ready
+name: 0004-research-spec-agent-role
+status: done
 agent: researcher
 created: 2026-02-21
 ---

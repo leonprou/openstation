@@ -1,6 +1,6 @@
 ---
 kind: task
-name: update-vault-structure
+name: 0002-update-vault-structure
 status: done
 agent:
 created: 2026-02-21

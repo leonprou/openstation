@@ -1,6 +1,6 @@
 # Agent Station
 
-Task management system for Claude Code agents. Pure convention —
+Task management system for coding AI agents. Pure convention —
 markdown specs + skills, zero runtime dependencies.
 
 ## Vault Structure
@@ -22,11 +22,14 @@ minimum `kind` and `name` fields.
 
 ## Creating a New Task
 
-1. Create a file in `tasks/` with a descriptive kebab-case name
-2. Add frontmatter: `kind: task`, `name`, `status: backlog`,
-   `agent`, `created`
+1. Create a file in `tasks/` named `NNNN-kebab-case-name.md` where
+   `NNNN` is the next available 4-digit auto-incrementing ID
+2. Add frontmatter: `kind: task`, `name: NNNN-kebab-case-name`,
+   `status: backlog`, `agent`, `created`
 3. Write Requirements and Verification sections in the body
 4. Set `status: ready` when the task is ready for an agent
+
+Use `/agent-station.create` to auto-assign the next ID.
 
 ## Dispatching an Agent
 
@@ -48,8 +51,10 @@ the manual, and executes.
 
 ## Artifacts
 
-Task outputs are stored alongside the task in `tasks/`. For
-multiple artifacts, use a subdirectory: `tasks/<task-name>/`.
+Task outputs are stored alongside the task in `tasks/`. Artifact
+files share the parent task's ID prefix (e.g.,
+`tasks/0003-my-task-notes.md`). For multiple artifacts, use a
+subdirectory: `tasks/<NNNN-task-name>/`.
 
 ## Discovery
 

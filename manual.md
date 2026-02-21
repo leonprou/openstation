@@ -36,12 +36,13 @@ executing tasks within Agent Station.
   notes, code changes, reports, etc.).
 - Store artifacts alongside the task in `tasks/`:
   - **Single artifact**: Place the artifact file next to the task
-    file (e.g., `tasks/my-task-notes.md`).
+    file, sharing the task's ID prefix (e.g.,
+    `tasks/0003-my-task-notes.md` for task `0003-my-task`).
   - **Multiple artifacts**: Create a subdirectory named after the
     task containing the task spec and all artifacts:
     ```
-    tasks/my-task/
-    ├── my-task.md           # task spec
+    tasks/0003-my-task/
+    ├── 0003-my-task.md      # task spec
     ├── research-notes.md    # artifact
     └── implementation.md    # artifact
     ```
@@ -52,8 +53,8 @@ executing tasks within Agent Station.
 
 If a task requires decomposition into smaller pieces:
 
-1. Create a new task file in `tasks/` with a descriptive kebab-case
-   name.
+1. Create a new task file in `tasks/` using the create skill
+   (`/agent-station.create`) to auto-assign the next ID.
 2. Set `parent: <current-task-name>` in frontmatter.
 3. Set `status: backlog` (or `ready` if it can be executed
    immediately).
