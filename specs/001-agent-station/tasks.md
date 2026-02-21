@@ -20,9 +20,9 @@
 **Purpose**: Create the vault directory structure and symlinks for
 Claude Code discovery.
 
-- [ ] T001 Create vault directories: `tasks/`, `agents/`, `skills/` with `.gitkeep` files
-- [ ] T002 [P] Create symlink `.claude/agents/` → `agents/` for Claude Code agent discovery (per research R1)
-- [ ] T003 [P] Create symlink `.claude/commands/` → `skills/` for Claude Code skill discovery (per constitution). Note: existing speckit commands in `.claude/commands/` must be relocated to `skills/` or handled as a migration step
+- [x] T001 Create vault directories: `tasks/`, `agents/`, `skills/` with `.gitkeep` files
+- [x] T002 [P] Create symlink `.claude/agents/` → `agents/` for Claude Code agent discovery (per research R1)
+- [x] T003 [P] Create individual symlink `.claude/commands/agent-station-executor.md` → `skills/agent-station-executor.md` for skill discovery. Note: directory-level symlink deferred — speckit commands coexist in `.claude/commands/`
 
 **Checkpoint**: Vault directories exist, symlinks resolve correctly.
 
@@ -35,8 +35,8 @@ operate without these.
 
 **CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T004 [P] Write `manual.md` at vault root describing the work process: task discovery, execution steps, artifact storage conventions, sub-task creation, and completion/verification handling (per data-model.md Manual sections and FR-007)
-- [ ] T005 [P] Write executor skill in `skills/agent-station-executor.md` with Claude Code command frontmatter (`description` field). Skill body must cover: startup sequence, task discovery (`status: ready` + agent match), manual loading, status updates, artifact storage alongside tasks, verification, and completion handling (per FR-004, data-model.md Skill schema, research R3)
+- [x] T004 [P] Write `manual.md` at vault root describing the work process: task discovery, execution steps, artifact storage conventions, sub-task creation, and completion/verification handling (per data-model.md Manual sections and FR-007)
+- [x] T005 [P] Write executor skill in `skills/agent-station-executor.md` with Claude Code command frontmatter (`description` field). Skill body must cover: startup sequence, task discovery (`status: ready` + agent match), manual loading, status updates, artifact storage alongside tasks, verification, and completion handling (per FR-004, data-model.md Skill schema, research R3)
 
 **Checkpoint**: Manual and executor skill exist. An agent loading the skill would have full operational instructions.
 
@@ -53,7 +53,7 @@ it has all required fields (`kind: task`, `name`, `status`, `agent`,
 
 ### Implementation for User Story 1
 
-- [ ] T006 [US1] Write sample task spec in `tasks/research-obsidian-plugin-api.md` with frontmatter per data-model.md Task schema (`kind: task`, `name: research-obsidian-plugin-api`, `status: ready`, `agent: researcher`, `created: 2026-02-21`) and Requirements + Verification body sections
+- [x] T006 [US1] Write sample task spec in `tasks/research-obsidian-plugin-api.md` with frontmatter per data-model.md Task schema (`kind: task`, `name: research-obsidian-plugin-api`, `status: ready`, `agent: researcher`, `created: 2026-02-21`) and Requirements + Verification body sections
 
 **Checkpoint**: A valid task file exists in `tasks/`. Frontmatter parses correctly. All required fields present.
 
@@ -71,8 +71,8 @@ and sets final status.
 
 ### Implementation for User Story 2
 
-- [ ] T007 [US2] Write researcher agent spec in `agents/researcher.md` with merged frontmatter per data-model.md Agent schema and research R2 (`kind: agent`, `name: researcher`, `description`, `model: claude-sonnet-4-6`, `skills: [agent-station-executor]`). Body: identity, capabilities, constraints — no Agent Station-specific instructions (Principle II)
-- [ ] T008 [US2] End-to-end validation: verify all references resolve — task `agent: researcher` → `agents/researcher.md` exists, agent `skills: [agent-station-executor]` → `skills/agent-station-executor.md` exists, `.claude/agents/researcher.md` resolves via symlink, `.claude/commands/agent-station-executor.md` resolves via symlink
+- [x] T007 [US2] Write researcher agent spec in `agents/researcher.md` with merged frontmatter per data-model.md Agent schema and research R2 (`kind: agent`, `name: researcher`, `description`, `model: claude-sonnet-4-6`, `skills: [agent-station-executor]`). Body: identity, capabilities, constraints — no Agent Station-specific instructions (Principle II)
+- [x] T008 [US2] End-to-end validation: verify all references resolve — task `agent: researcher` → `agents/researcher.md` exists, agent `skills: [agent-station-executor]` → `skills/agent-station-executor.md` exists, `.claude/agents/researcher.md` resolves via symlink, `.claude/commands/agent-station-executor.md` resolves via symlink
 
 **Checkpoint**: `claude --agent researcher` can be launched. The agent discovers the sample task and has full operational instructions from the executor skill and manual.
 
@@ -89,7 +89,7 @@ are human-readable.
 
 ### Implementation for User Story 3
 
-- [ ] T009 [US3] Write project `CLAUDE.md` at vault root with: vault structure overview, spec format description (kind field, frontmatter + markdown), task creation instructions, dispatch command (`claude --agent <name>`), task status lifecycle, and artifact conventions. Must align with constitution and corrected dispatch from research R4
+- [x] T009 [US3] Write project `CLAUDE.md` at vault root with: vault structure overview, spec format description (kind field, frontmatter + markdown), task creation instructions, dispatch command (`claude --agent <name>`), task status lifecycle, and artifact conventions. Must align with constitution and corrected dispatch from research R4
 
 **Checkpoint**: Any operator browsing the vault can understand the system in under 5 minutes (SC-005). Directory structure and CLAUDE.md together explain the full system.
 
@@ -99,10 +99,10 @@ are human-readable.
 
 **Purpose**: Final validation and cleanup.
 
-- [ ] T010 Validate all spec filenames use kebab-case (FR-010)
-- [ ] T011 Validate no Agent Station-specific instructions in agent body (Principle II)
-- [ ] T012 Validate constitution compliance: re-run Constitution Check from plan.md against delivered files
-- [ ] T013 Run quickstart.md walkthrough: verify the documented steps match the actual vault state
+- [x] T010 Validate all spec filenames use kebab-case (FR-010)
+- [x] T011 Validate no Agent Station-specific instructions in agent body (Principle II)
+- [x] T012 Validate constitution compliance: re-run Constitution Check from plan.md against delivered files
+- [x] T013 Run quickstart.md walkthrough: verify the documented steps match the actual vault state
 
 ---
 
