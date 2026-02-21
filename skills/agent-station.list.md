@@ -12,7 +12,7 @@ Scan all `.md` files in `tasks/` and display them as a markdown table.
 `$ARGUMENTS` — optional space-separated filters in `key:value` format.
 
 Supported filters:
-- `status:<value>` — filter by status (backlog, ready, in-progress, done, failed)
+- `status:<value>` — filter by status (backlog, ready, in-progress, review, done, failed)
 - `agent:<value>` — filter by assigned agent
 
 If no arguments provided, show all tasks.
@@ -24,12 +24,13 @@ If no arguments provided, show all tasks.
 2. Parse YAML frontmatter from each file.
 3. Apply any filters from `$ARGUMENTS`.
 4. Display a markdown table with columns:
-   | ID | Task | Status | Agent | Created |
+   | ID | Task | Status | Agent | Verifier | Created |
    The ID column shows the 4-digit numeric prefix extracted from the
-   filename (e.g., `0003`).
+   filename (e.g., `0003`). The Verifier column shows the `verifier`
+   field value (default `manual` if absent).
 5. Sort by ID (ascending) as primary sort.
 6. Below the table, show summary counts:
    ```
-   Total: N | backlog: N | ready: N | in-progress: N | done: N | failed: N
+   Total: N | backlog: N | ready: N | in-progress: N | review: N | done: N | failed: N
    ```
    Only include statuses that have at least one task.

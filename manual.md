@@ -65,14 +65,36 @@ If a task requires decomposition into smaller pieces:
 
 After working through all requirements:
 
-1. Read the **Verification** section of the task spec.
-2. Check each verification item.
-3. If ALL items pass:
-   - Update task frontmatter: `status: done`
-4. If ANY item fails:
-   - Update task frontmatter: `status: failed`
-   - Document which items failed and why (add a note in the task
-     body or as an artifact).
+1. Update task frontmatter: `status: review`.
+2. The designated verifier (specified in the task's `verifier`
+   field) handles verification from here.
+3. Do **not** self-verify or set `done`/`failed` — that is the
+   verifier's responsibility.
+
+## Verifying a Task
+
+Only the designated verifier may approve or reject a task. The
+`verifier` field in task frontmatter names the verifier — either
+an agent name or `manual` (meaning a human verifies).
+
+### Agent Verifier
+
+If `verifier` is an agent name, that agent:
+
+1. Reads the task spec and its **Verification** section.
+2. Checks each verification item against the artifacts and changes
+   produced.
+3. If ALL items pass: set `status: done`.
+4. If ANY item fails: set `status: failed` and document which items
+   failed and why (add a note in the task body or as an artifact).
+
+### Manual Verifier
+
+If `verifier` is `manual` (the default), a human operator:
+
+1. Reviews the task's artifacts and changes.
+2. Runs through the **Verification** checklist.
+3. Sets `status: done` or `status: failed` accordingly.
 
 ## Updating Frontmatter
 

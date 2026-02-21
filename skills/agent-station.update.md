@@ -28,9 +28,11 @@ The task name can be either the full ID-prefixed name (e.g.,
    - If still not found, report an error and list available tasks.
 3. Read the current frontmatter.
 4. Validate each field:value pair:
-   - `status` must be one of: backlog, ready, in-progress, done, failed
+   - `status` must be one of: backlog, ready, in-progress, review, done, failed
    - `agent` should match an agent in `agents/` (warn if not found,
      but allow it)
+   - `verifier` should be an agent name or `manual` (warn if agent
+     not found, but allow it)
    - Other frontmatter fields are updated as-is.
 5. Show a before/after comparison of changed fields.
 6. Apply the changes, preserving all other frontmatter fields and
