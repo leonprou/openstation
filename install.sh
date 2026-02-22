@@ -3,7 +3,7 @@ set -euo pipefail
 
 # --- Constants -----------------------------------------------------------
 
-REPO_OWNER="openstation"
+REPO_OWNER="leonprou"
 REPO_NAME="openstation"
 BRANCH="main"
 BASE_URL="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}"

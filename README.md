@@ -9,7 +9,7 @@ Open Station gives coding AI agents a structured way to receive, execute, and co
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/openstation/openstation/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/leonprou/openstation/main/install.sh | bash
 ```
 
 This creates the vault directories, installs skills and the manual, sets up symlinks for slash-command discovery, and adds an Open Station section to your `CLAUDE.md`.
