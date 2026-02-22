@@ -1,3 +1,9 @@
+---
+kind: spec
+name: agent-station-design
+created: 2026-02-20
+---
+
 # Agent Station Design
 
 ## Overview

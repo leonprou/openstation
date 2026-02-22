@@ -1,3 +1,9 @@
+---
+kind: spec
+name: agent-station-implementation-plan
+created: 2026-02-20
+---
+
 # Agent Station Implementation Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
