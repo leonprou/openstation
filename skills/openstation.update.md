@@ -1,5 +1,5 @@
 ---
-name: agent-station.update
+name: openstation.update
 description: Update task frontmatter fields. $ARGUMENTS = <task-name> field:value [...]. Use when user says "update task", "change status", "assign agent", or wants to modify task metadata.
 ---
 
@@ -30,7 +30,7 @@ The task name can be either the full ID-prefixed name (e.g.,
 4. Validate each field:value pair:
    - `status` must be one of: backlog, ready, in-progress, review, failed.
      **`status:done` is not allowed via update** — use
-     `/agent-station.done` instead, which sets the status and
+     `/openstation.done` instead, which sets the status and
      archives the task in one step. Reject with an error message.
    - `agent` should match an agent in `agents/` (warn if not found,
      but allow it)

@@ -10,7 +10,7 @@ created: 2026-02-21
 
 ## Requirements
 
-Restructure the Agent Station vault to better organize artifacts:
+Restructure the Open Station vault to better organize artifacts:
 
 ### 1. Remove `knowledge/` folder
 

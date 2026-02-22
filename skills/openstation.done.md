@@ -1,5 +1,5 @@
 ---
-name: agent-station.done
+name: openstation.done
 description: Mark a task done and archive it — sets status to done, then promotes the spec and artifacts to the correct destination. $ARGUMENTS = task name. Use when user says "done task", "complete task", "mark done", or wants to finish and archive a task.
 ---
 

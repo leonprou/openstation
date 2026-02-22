@@ -1,7 +1,7 @@
-# Agent Station Manual
+# Open Station Manual
 
 This document describes the work process that agents follow when
-executing tasks within Agent Station.
+executing tasks within Open Station.
 
 ## Task Discovery
 
@@ -54,7 +54,7 @@ executing tasks within Agent Station.
 If a task requires decomposition into smaller pieces:
 
 1. Create a new task file in `tasks/` using the create skill
-   (`/agent-station.create`) to auto-assign the next ID.
+   (`/openstation.create`) to auto-assign the next ID.
 2. Set `parent: <current-task-name>` in frontmatter.
 3. Set `status: backlog` (or `ready` if it can be executed
    immediately).
@@ -84,7 +84,7 @@ If `owner` is an agent name, that agent:
 1. Reads the task spec and its **Verification** section.
 2. Checks each verification item against the artifacts and changes
    produced.
-3. If ALL items pass: run `/agent-station.done <task-name>` to mark
+3. If ALL items pass: run `/openstation.done <task-name>` to mark
    the task done and archive it.
 4. If ANY item fails: set `status: failed` and document which items
    failed and why (add a note in the task body or as an artifact).
@@ -95,12 +95,12 @@ If `owner` is `manual` (the default), a human operator:
 
 1. Reviews the task's artifacts and changes.
 2. Runs through the **Verification** checklist.
-3. If all items pass: run `/agent-station.done <task-name>`.
+3. If all items pass: run `/openstation.done <task-name>`.
 4. If any item fails: set `status: failed` accordingly.
 
 ## Completing & Archiving
 
-When a task passes verification, run `/agent-station.done <task-name>`
+When a task passes verification, run `/openstation.done <task-name>`
 to mark it done and move it out of `tasks/` in a single step. This
 keeps the directory as a clean active work queue.
 

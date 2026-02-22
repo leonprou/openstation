@@ -34,15 +34,15 @@ the ID from the directory name.
 
 ### Deliverables
 
-1. **Create `skills/agent-station.done.md`** — skill that marks a
+1. **Create `skills/openstation.done.md`** — skill that marks a
    task done and promotes it to the correct destination. Input is
    the task name. Procedure: locate task, verify review status, set
    done, find associated files (same ID prefix or subdirectory),
    determine destination from agent field, strip ID prefix, move
    files, confirm.
 
-2. **Create `.claude/commands/agent-station.done.md`** — symlink
-   to `../../skills/agent-station.done.md`.
+2. **Create `.claude/commands/openstation.done.md`** — symlink
+   to `../../skills/openstation.done.md`.
 
 3. **Update `manual.md`** — add "Promoting Completed Work" section
    after "Verifying a Task" with split routing rules.
@@ -53,7 +53,7 @@ the ID from the directory name.
 5. **Create `archive/tasks/`** — directory for all completed task
    specs.
 
-6. **Update `skills/agent-station.execute.md`** — update vault
+6. **Update `skills/openstation.execute.md`** — update vault
    structure listing to reflect `specs/`, `archive/tasks/`.
 
 7. **Migrate existing done tasks** (split spec from artifacts):
@@ -69,11 +69,11 @@ the ID from the directory name.
 
 ## Verification
 
-- [ ] `/agent-station.done` skill exists and symlink works
+- [ ] `/openstation.done` skill exists and symlink works
 - [ ] Manual has "Promoting Completed Work" section with split routing
 - [ ] CLAUDE.md documents split promotion and new vault structure
 - [ ] All done task specs in `archive/tasks/` (6 files)
 - [ ] `research/` has 3 artifact files (notes + report), no task specs
-- [ ] `specs/` has `001-agent-station/` (unchanged)
+- [ ] `specs/` has `001-open-station/` (unchanged)
 - [ ] `projects/` and `archived/` directories removed
 - [ ] `tasks/` contains only active tasks (0006, 0008)

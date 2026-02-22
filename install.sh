@@ -3,18 +3,18 @@ set -euo pipefail
 
 # --- Constants -----------------------------------------------------------
 
-REPO_OWNER="agent-station"
-REPO_NAME="agent-station"
+REPO_OWNER="openstation"
+REPO_NAME="openstation"
 BRANCH="main"
 BASE_URL="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}"
 
 SKILLS=(
-  agent-station.create.md
-  agent-station.dispatch.md
-  agent-station.done.md
-  agent-station.execute.md
-  agent-station.list.md
-  agent-station.update.md
+  openstation.create.md
+  openstation.dispatch.md
+  openstation.done.md
+  openstation.execute.md
+  openstation.list.md
+  openstation.update.md
 )
 
 AGENTS=(
@@ -22,8 +22,8 @@ AGENTS=(
   author.md
 )
 
-MARKER_START="<!-- agent-station:start -->"
-MARKER_END="<!-- agent-station:end -->"
+MARKER_START="<!-- openstation:start -->"
+MARKER_END="<!-- openstation:end -->"
 
 # --- Helpers -------------------------------------------------------------
 
@@ -36,7 +36,7 @@ usage() {
   cat <<'USAGE'
 Usage: install.sh [OPTIONS]
 
-Bootstrap Agent Station into the current project.
+Bootstrap Open Station into the current project.
 
 Options:
   --local PATH   Copy files from a local clone instead of downloading
@@ -44,8 +44,8 @@ Options:
   --help         Show this help message
 
 Examples:
-  curl -fsSL https://raw.githubusercontent.com/agent-station/agent-station/main/install.sh | bash
-  ./install.sh --local /path/to/agent-station
+  curl -fsSL https://raw.githubusercontent.com/openstation/openstation/main/install.sh | bash
+  ./install.sh --local /path/to/openstation
   ./install.sh --no-agents
 USAGE
   exit 0
@@ -103,7 +103,7 @@ done
 
 # --- Prerequisites -------------------------------------------------------
 
-printf '\n\033[1mAgent Station Installer\033[0m\n\n'
+printf '\n\033[1mOpen Station Installer\033[0m\n\n'
 
 # Check curl (only needed when not using --local)
 if [[ -z "$LOCAL_PATH" ]]; then
@@ -120,7 +120,7 @@ if [[ -n "$LOCAL_PATH" ]]; then
     exit 1
   fi
   if [[ ! -f "$LOCAL_PATH/manual.md" ]]; then
-    err "Local path does not look like an Agent Station repo: $LOCAL_PATH"
+    err "Local path does not look like an Open Station repo: $LOCAL_PATH"
     exit 1
   fi
 fi
@@ -207,8 +207,8 @@ printf 'Updating CLAUDE.md...\n'
 # Write managed section to a temp file (avoids awk multiline issues)
 section_file=$(mktemp)
 cat > "$section_file" <<'SECTION'
-<!-- agent-station:start -->
-# Agent Station
+<!-- openstation:start -->
+# Open Station
 
 Task management system for coding AI agents. Pure convention —
 markdown specs + skills, zero runtime dependencies.
@@ -218,7 +218,7 @@ markdown specs + skills, zero runtime dependencies.
 ```
 tasks/           — Task specs (active work: backlog through review)
 agents/          — Agent specs (identity + skill references)
-skills/          — Agent Station skills (operational knowledge)
+skills/          — Open Station skills (operational knowledge)
 specs/           — Spec artifacts (from author and other agents)
 research/        — Research artifacts (from researcher)
 archive/tasks/   — Done task specs (all completed tasks)
@@ -227,55 +227,55 @@ manual.md        — Work process agents follow
 
 ## Quick Start
 
-Create a task:  `/agent-station.create <description>`
-List tasks:     `/agent-station.list`
-Update a task:  `/agent-station.update <name> field:value`
+Create a task:  `/openstation.create <description>`
+List tasks:     `/openstation.list`
+Update a task:  `/openstation.update <name> field:value`
 Run an agent:   `claude --agent <name>`
-Complete task:  `/agent-station.done <name>`
+Complete task:  `/openstation.done <name>`
 
 See `manual.md` for the full work process.
-<!-- agent-station:end -->
+<!-- openstation:end -->
 SECTION
 
 if [[ ! -f "CLAUDE.md" ]]; then
   # Create new CLAUDE.md
   cp "$section_file" "CLAUDE.md"
-  info "Created CLAUDE.md with Agent Station section"
+  info "Created CLAUDE.md with Open Station section"
 elif grep -q "$MARKER_START" "CLAUDE.md"; then
   # Replace existing managed section
   awk '
-    /<!-- agent-station:start -->/ { skip=1; next }
-    /<!-- agent-station:end -->/   { skip=0; next }
+    /<!-- openstation:start -->/ { skip=1; next }
+    /<!-- openstation:end -->/   { skip=0; next }
     !skip { print }
   ' "CLAUDE.md" > "CLAUDE.md.tmp"
   # Insert section at the position of removed content (or append)
   # Simpler: rebuild file = content-before + section + content-after
   awk -v sfile="'"$section_file"'" '
     BEGIN { printing=1 }
-    /<!-- agent-station:start -->/ {
+    /<!-- openstation:start -->/ {
       while ((getline line < sfile) > 0) print line
       printing=0
       next
     }
-    /<!-- agent-station:end -->/ { printing=1; next }
+    /<!-- openstation:end -->/ { printing=1; next }
     printing { print }
   ' "CLAUDE.md" > "CLAUDE.md.tmp"
   mv "CLAUDE.md.tmp" "CLAUDE.md"
-  info "Updated Agent Station section in CLAUDE.md"
+  info "Updated Open Station section in CLAUDE.md"
 else
   # Append to existing CLAUDE.md
   printf '\n' >> "CLAUDE.md"
   cat "$section_file" >> "CLAUDE.md"
-  info "Appended Agent Station section to CLAUDE.md"
+  info "Appended Open Station section to CLAUDE.md"
 fi
 
 rm -f "$section_file"
 
 # --- Summary -------------------------------------------------------------
 
-printf '\n\033[1;32mAgent Station installed successfully!\033[0m\n\n'
+printf '\n\033[1;32mOpen Station installed successfully!\033[0m\n\n'
 printf 'Next steps:\n'
 printf '  1. Review CLAUDE.md and manual.md\n'
 printf '  2. Customize agent specs in agents/\n'
-printf '  3. Create your first task: /agent-station.create <description>\n'
+printf '  3. Create your first task: /openstation.create <description>\n'
 printf '  4. Run an agent: claude --agent <name>\n\n'

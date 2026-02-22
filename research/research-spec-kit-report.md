@@ -386,7 +386,7 @@ The `/speckit.implement` command reads tasks.md and executes:
 
 ---
 
-## 6. What Agent Station Should Adopt
+## 6. What Open Station Should Adopt
 
 ### 6.1 Constitution/Principles System (HIGH PRIORITY)
 
@@ -394,7 +394,7 @@ The `/speckit.implement` command reads tasks.md and executes:
 project-level governance that all tasks and agents must respect.
 
 **Why**: Spec-Kit's constitution creates consistency across all
-generated specs and code. Agent Station lacks project-level
+generated specs and code. Open Station lacks project-level
 constraints that agents must follow.
 
 **How to adopt**: Add a `constitution.md` (or `principles.md`) to
@@ -407,7 +407,7 @@ zero runtime cost.
 **What**: Explicit slash commands for each workflow stage with clear
 inputs, outputs, and transition suggestions.
 
-**Why**: Agent Station has `task-create`, `task-update`, `task-list`,
+**Why**: Open Station has `task-create`, `task-update`, `task-list`,
 `dispatch` -- these are CRUD operations, not workflow stages. Spec-Kit
 shows that workflow-level commands (specify, plan, tasks, implement)
 are more natural for users.
@@ -431,7 +431,7 @@ the next command after completion.
 **Why**: This creates a guided workflow. Users don't need to remember
 the right sequence of commands.
 
-**How to adopt**: Add a `handoffs` field to Agent Station skill
+**How to adopt**: Add a `handoffs` field to Open Station skill
 frontmatter. The executor skill can read this and suggest the next
 step to the user. Example:
 
@@ -469,7 +469,7 @@ pure convention -- templates are just markdown files.
 requirements" -- checklists that validate the QUALITY of specs, not
 whether they're implemented.
 
-**Why**: Agent Station tasks have Verification sections, but these
+**Why**: Open Station tasks have Verification sections, but these
 check implementation completeness, not specification quality. Adding
 a checklist step before execution would catch ambiguities early.
 
@@ -494,7 +494,7 @@ that can be parallelized. Could use tags in frontmatter:
 **What**: The `/speckit.analyze` command that checks consistency
 across spec, plan, and tasks without modifying anything.
 
-**Why**: As Agent Station grows, consistency between tasks, agents,
+**Why**: As Open Station grows, consistency between tasks, agents,
 and skills will matter. A read-only audit skill would catch drift.
 
 **How to adopt**: Create an `/audit` skill that scans all tasks,
@@ -503,17 +503,17 @@ agents, orphaned tasks).
 
 ---
 
-## 7. What Agent Station Should NOT Adopt
+## 7. What Open Station Should NOT Adopt
 
 ### 7.1 The Python CLI (specify init)
 
-**Why not**: Agent Station's core philosophy is zero runtime
+**Why not**: Open Station's core philosophy is zero runtime
 dependencies. Spec-Kit requires `uv`, Python 3.11+, and a CLI tool
 (`specify`). The CLI handles agent detection, file generation, and
 command format conversion. This adds a build step and dependency
-chain that contradicts Agent Station's convention-only approach.
+chain that contradicts Open Station's convention-only approach.
 
-**Alternative**: Agent Station already handles project setup through
+**Alternative**: Open Station already handles project setup through
 its vault structure and CLAUDE.md. No CLI is needed.
 
 ### 7.2 Shell Script Automation Layer
@@ -538,12 +538,12 @@ than shell scripts. The agent IS the runtime.
 ### 7.3 Multi-Agent Command Format Conversion
 
 **Why not**: Spec-Kit's adapter pattern for 20+ agents is impressive
-engineering but irrelevant to Agent Station. Agent Station currently
+engineering but irrelevant to Open Station. Open Station currently
 targets Claude Code only via `.claude/commands/` and `--agent`. The
 complexity of maintaining TOML conversion, per-agent directories,
 and argument placeholder translation is not justified.
 
-**If needed later**: Agent Station could adopt a simpler version --
+**If needed later**: Open Station could adopt a simpler version --
 a skill that generates command files for other agents from a
 canonical markdown template. But this should be deferred until
 there's actual demand for multi-agent support.
@@ -560,7 +560,7 @@ to `agents/`).
 
 **Why not**: Spec-Kit ties specs to git branches (`001-feature-name`
 branch -> `specs/001-feature-name/` directory). This creates a tight
-coupling between git workflow and spec organization. Agent Station
+coupling between git workflow and spec organization. Open Station
 tasks are standalone files in `tasks/` -- they don't need branch
 awareness.
 
@@ -568,7 +568,7 @@ awareness.
 
 **Why not**: Spec-Kit has an RFC for a full extension system with
 manifests, catalogs, hooks, versioning, and package management. This
-is enterprise-grade infrastructure. Agent Station should not adopt
+is enterprise-grade infrastructure. Open Station should not adopt
 this level of complexity. Skills ARE the extension mechanism in Agent
 Station -- they're just markdown files.
 
@@ -577,7 +577,7 @@ Station -- they're just markdown files.
 **Why not**: Spec-Kit's `update-agent-context.sh` automatically
 generates/updates CLAUDE.md, GEMINI.md, AGENTS.md, etc. with project
 information extracted from plan.md. This is useful for projects that
-use Spec-Kit's planning workflow, but Agent Station's CLAUDE.md is
+use Spec-Kit's planning workflow, but Open Station's CLAUDE.md is
 hand-maintained and specific to the vault's needs.
 
 ---
@@ -602,20 +602,20 @@ hand-maintained and specific to the vault's needs.
 
 ## Key Takeaway
 
-Spec-Kit and Agent Station solve different problems. Spec-Kit is a
+Spec-Kit and Open Station solve different problems. Spec-Kit is a
 **specification pipeline** -- it transforms ideas into specs into
 plans into tasks into code, with heavy template-driven LLM
-constraint. Agent Station is a **task management system** for AI
+constraint. Open Station is a **task management system** for AI
 agents -- it organizes work, assigns agents, and tracks status.
 
-The most valuable thing Agent Station can borrow is Spec-Kit's
+The most valuable thing Open Station can borrow is Spec-Kit's
 **discipline around templates and quality gates**. The templates
 force structured output. The constitution enforces consistency. The
 checklist validates quality before execution. These are all pure
 conventions that require zero runtime dependencies.
 
-The thing Agent Station should explicitly avoid is Spec-Kit's
+The thing Open Station should explicitly avoid is Spec-Kit's
 **toolchain complexity**. The Python CLI, shell scripts, and
 multi-agent format conversion are necessary for Spec-Kit's goal of
-supporting 20+ agents, but they contradict Agent Station's core
+supporting 20+ agents, but they contradict Open Station's core
 principle of being pure convention with zero runtime dependencies.

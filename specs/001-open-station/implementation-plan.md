@@ -1,16 +1,16 @@
 ---
 kind: spec
-name: agent-station-implementation-plan
+name: openstation-implementation-plan
 created: 2026-02-20
 ---
 
-# Agent Station Implementation Plan
+# Open Station Implementation Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Bootstrap the Agent Station vault — folder structure, spec templates, the executor skill, and a sample task to validate the system end-to-end.
+**Goal:** Bootstrap the Open Station vault — folder structure, spec templates, the executor skill, and a sample task to validate the system end-to-end.
 
-**Architecture:** Pure convention system — markdown files with YAML frontmatter, organized in an Obsidian vault. No runtime code. A Claude Code skill (`agent-station-executor`) teaches agents how to operate within the system.
+**Architecture:** Pure convention system — markdown files with YAML frontmatter, organized in an Obsidian vault. No runtime code. A Claude Code skill (`openstation-executor`) teaches agents how to operate within the system.
 
 **Tech Stack:** Markdown, YAML frontmatter, Claude Code skills
 
@@ -174,7 +174,7 @@ kind: agent
 name: researcher
 model: claude-sonnet-4-6
 skills:
-  - agent-station-executor
+  - openstation-executor
 ---
 
 # Researcher
@@ -201,26 +201,26 @@ git commit -m "feat: add researcher agent spec"
 
 ---
 
-### Task 5: Write the `agent-station-executor` skill
+### Task 5: Write the `openstation-executor` skill
 
-This is the core of Agent Station. It teaches any Claude Code agent how to operate within the system.
+This is the core of Open Station. It teaches any Claude Code agent how to operate within the system.
 
 **Files:**
-- Create: `skills/agent-station-executor.md`
+- Create: `skills/openstation-executor.md`
 
 **Step 1: Create the skill file**
 
-Write `skills/agent-station-executor.md`:
+Write `skills/openstation-executor.md`:
 
 ```markdown
 ---
-name: agent-station-executor
-description: Teaches agents how to operate within Agent Station — find tasks, follow workflows, update state, and store artifacts.
+name: openstation-executor
+description: Teaches agents how to operate within Open Station — find tasks, follow workflows, update state, and store artifacts.
 ---
 
-# Agent Station Executor
+# Open Station Executor
 
-You are operating within **Agent Station**, a task management system. All state is stored as markdown files with YAML frontmatter. Follow these instructions exactly.
+You are operating within **Open Station**, a task management system. All state is stored as markdown files with YAML frontmatter. Follow these instructions exactly.
 
 ## Vault Structure
 
@@ -315,8 +315,8 @@ Verify the skill covers all six responsibilities from the design doc:
 **Step 3: Commit**
 
 ```bash
-git add skills/agent-station-executor.md
-git commit -m "feat: add agent-station-executor skill — core of Agent Station"
+git add skills/openstation-executor.md
+git commit -m "feat: add openstation-executor skill — core of Open Station"
 ```
 
 ---
@@ -345,7 +345,7 @@ created: 2026-02-20
 # Research Obsidian Plugin API
 
 ## Requirements
-Investigate the Obsidian plugin API to understand how Agent Station could integrate with Obsidian as a plugin in the future. Focus on:
+Investigate the Obsidian plugin API to understand how Open Station could integrate with Obsidian as a plugin in the future. Focus on:
 - How plugins read/write vault files
 - How plugins can add custom views (e.g., a task board)
 - How plugins hook into file change events
@@ -387,7 +387,7 @@ git commit -m "feat: add sample task spec for system validation"
 Write `CLAUDE.md`:
 
 ```markdown
-# Agent Station
+# Open Station
 
 Task management system for Claude Code agents. Pure convention — markdown specs + skills.
 
@@ -397,7 +397,7 @@ Task management system for Claude Code agents. Pure convention — markdown spec
 - `agents/` — Agent specs. Generic agent instructions + skill references.
 - `workflows/` — Workflow specs. Linear step pipelines.
 - `artifacts/` — Task-scoped outputs, nested by task name.
-- `skills/` — Agent Station skills (loaded by agents at runtime).
+- `skills/` — Open Station skills (loaded by agents at runtime).
 
 ## Spec Format
 
@@ -413,7 +413,7 @@ All specs use YAML frontmatter with a `kind` field (`task`, `agent`, or `workflo
 ## Dispatching an Agent
 
 ```bash
-claude --agent agents/<agent-name>.md --skill skills/agent-station-executor.md
+claude --agent agents/<agent-name>.md --skill skills/openstation-executor.md
 ```
 
 The agent will find its ready tasks, load the workflow, and execute step by step.
@@ -458,8 +458,8 @@ Expected: all referenced files exist, no errors.
 ```bash
 for agent in agents/*.md; do
   echo "=== $agent ==="
-  # Check that agent-station-executor skill exists
-  ls skills/agent-station-executor.md 2>&1
+  # Check that openstation-executor skill exists
+  ls skills/openstation-executor.md 2>&1
 done
 ```
 

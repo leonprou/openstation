@@ -1,4 +1,4 @@
-# Data Model: Agent Station
+# Data Model: Open Station
 
 All entities are markdown files with YAML frontmatter. This document
 defines the schema for each entity type.
@@ -75,7 +75,7 @@ Investigate the Obsidian plugin API...
 | `name`        | string   | yes      | Kebab-case identifier                          |
 | `description` | string   | yes      | What the agent does (for Claude Code discovery) |
 | `model`       | string   | no       | `claude-opus-4-6`, `claude-sonnet-4-6`, etc.   |
-| `skills`      | string[] | yes      | Skills to preload (must include `agent-station-executor`) |
+| `skills`      | string[] | yes      | Skills to preload (must include `openstation-executor`) |
 
 ### Body Sections
 
@@ -85,7 +85,7 @@ Investigate the Obsidian plugin API...
 | Capabilities  | yes      | What the agent can do                           |
 | Constraints   | no       | Behavioral guardrails                           |
 
-Agent body MUST NOT contain Agent Station-specific instructions
+Agent body MUST NOT contain Open Station-specific instructions
 (Constitution Principle II).
 
 ### Example
@@ -97,7 +97,7 @@ name: researcher
 description: Research agent for gathering and analyzing information
 model: claude-sonnet-4-6
 skills:
-  - agent-station-executor
+  - openstation-executor
 ---
 
 # Researcher
@@ -136,7 +136,7 @@ synthesize information to support decision-making.
 
 ## Skill (Executor)
 
-**Location**: `skills/agent-station-executor.md`
+**Location**: `skills/openstation-executor.md`
 **Discovery**: `.claude/commands/` → symlink to `skills/`
 **Format**: Markdown with YAML frontmatter (Claude Code command format)
 
@@ -150,7 +150,7 @@ synthesize information to support decision-making.
 ### Body
 
 The executor skill body contains the full operational instructions
-for how agents interact with Agent Station: startup sequence, task
+for how agents interact with Open Station: startup sequence, task
 discovery, manual loading, status updates, artifact storage, and
 completion handling.
 

@@ -7,12 +7,12 @@ owner: manual
 created: 2026-02-22
 ---
 
-# Install Script for Bootstrapping Agent Station
+# Install Script for Bootstrapping Open Station
 
 ## Requirements
 
 Create `install.sh` at repo root — a bash script that bootstraps
-Agent Station into any existing project. Runnable via `curl | bash`
+Open Station into any existing project. Runnable via `curl | bash`
 from the (future) open source GitHub repo.
 
 ### Script behavior
@@ -23,21 +23,21 @@ from the (future) open source GitHub repo.
    `research/`, `archive/tasks/`, `.claude/commands/` — with `.gitkeep`
    in content dirs
 4. **Download skills** (6 files → `skills/`):
-   - agent-station.create.md
-   - agent-station.dispatch.md
-   - agent-station.done.md
-   - agent-station.execute.md
-   - agent-station.list.md
-   - agent-station.update.md
+   - openstation.create.md
+   - openstation.dispatch.md
+   - openstation.done.md
+   - openstation.execute.md
+   - openstation.list.md
+   - openstation.update.md
 5. **Download manual.md** → project root
 6. **Download example agents** (unless `--no-agents`):
    - researcher.md → `agents/`
    - author.md → `agents/`
 7. **Create symlinks**:
-   - `.claude/commands/agent-station.*.md` → `../../skills/agent-station.*.md`
+   - `.claude/commands/openstation.*.md` → `../../skills/openstation.*.md`
    - `.claude/agents` → `../agents` (directory symlink)
-8. **Update CLAUDE.md**: inject Agent Station section between
-   `<!-- agent-station:start -->` / `<!-- agent-station:end -->` markers.
+8. **Update CLAUDE.md**: inject Open Station section between
+   `<!-- openstation:start -->` / `<!-- openstation:end -->` markers.
    Create if missing, append if no markers, replace if markers exist.
 9. **Print summary** with next steps
 
@@ -61,7 +61,7 @@ from the (future) open source GitHub repo.
 - [ ] `install.sh --local .` in a temp dir creates all dirs, files, symlinks
 - [ ] Running it again is idempotent (no errors, skills updated, agents skipped)
 - [ ] `--no-agents` leaves `agents/` empty (just .gitkeep)
-- [ ] CLAUDE.md gets Agent Station section with markers
+- [ ] CLAUDE.md gets Open Station section with markers
 - [ ] `.claude/agents/researcher.md` resolves through the symlink
-- [ ] `.claude/commands/agent-station.create.md` symlink resolves to skill
+- [ ] `.claude/commands/openstation.create.md` symlink resolves to skill
 - [ ] `--help` prints usage

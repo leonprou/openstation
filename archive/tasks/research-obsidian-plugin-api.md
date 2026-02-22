@@ -10,7 +10,7 @@ created: 2026-02-21
 
 ## Requirements
 
-Investigate the Obsidian plugin API to understand how Agent Station
+Investigate the Obsidian plugin API to understand how Open Station
 could integrate with Obsidian as a plugin in the future. Focus on:
 
 - How plugins read and write vault files

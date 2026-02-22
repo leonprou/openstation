@@ -1,4 +1,4 @@
-# Quickstart: Agent Station
+# Quickstart: Open Station
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Launch a Claude Code session with the assigned agent:
 claude --agent researcher
 ```
 
-The agent auto-loads the `agent-station-executor` skill (listed in its
+The agent auto-loads the `openstation-executor` skill (listed in its
 `skills` frontmatter), finds the ready task, follows the manual, and
 executes.
 
@@ -57,7 +57,7 @@ Artifacts appear alongside the task in `tasks/`.
 ## Vault Layout
 
 ```
-agent-station/
+openstation/
 ├── tasks/           # Your work items
 ├── agents/          # Agent definitions
 ├── skills/          # System skills

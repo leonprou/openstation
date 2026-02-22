@@ -1,19 +1,19 @@
 ---
 kind: spec
-name: agent-station-design
+name: openstation-design
 created: 2026-02-20
 ---
 
-# Agent Station Design
+# Open Station Design
 
 ## Overview
 
-Agent Station is a task management system for Claude Code agents. It uses markdown specs as the sole data format, Obsidian as the human interface, and skills as the agent interface. Zero runtime dependencies — the system is pure convention.
+Open Station is a task management system for Claude Code agents. It uses markdown specs as the sole data format, Obsidian as the human interface, and skills as the agent interface. Zero runtime dependencies — the system is pure convention.
 
 ## Core Principles
 
 - **Everything is a spec** — tasks, agents, and workflows are all markdown files with YAML frontmatter
-- **Skills are the glue** — Agent Station operational knowledge lives in skills, not agent specs
+- **Skills are the glue** — Open Station operational knowledge lives in skills, not agent specs
 - **Obsidian is the database** — markdown files in a vault, human-browsable and agent-readable
 - **Manual dispatch** — a human launches Claude Code sessions pointed at tasks
 - **Linear workflows** — sequential step pipelines, simple and predictable
@@ -62,14 +62,14 @@ kind: agent
 name: backend-engineer
 model: claude-opus-4-6
 skills:
-  - agent-station-executor
+  - openstation-executor
   - test-driven-development
 ```
 
 Body contains:
 - Agent identity, capabilities, and constraints
-- Generic instructions — NOT Agent Station-specific
-- The `agent-station-executor` skill bridges agents to the system
+- Generic instructions — NOT Open Station-specific
+- The `openstation-executor` skill bridges agents to the system
 
 ### Workflow Spec
 
@@ -103,7 +103,7 @@ Steps are sequential. Each step produces named artifacts.
 ## Vault Structure
 
 ```
-agent-station/
+openstation/
 ├── tasks/                    # Task specs
 ├── agents/                   # Agent specs
 ├── workflows/                # Workflow specs
@@ -111,8 +111,8 @@ agent-station/
 │   └── <task-name>/
 │       ├── research-notes.md
 │       └── implementation-plan.md
-├── skills/                   # Agent Station skills
-│   └── agent-station-executor.md
+├── skills/                   # Open Station skills
+│   └── openstation-executor.md
 └── .claude/
     └── settings.json
 ```
@@ -121,7 +121,7 @@ Flat by type. Artifacts nested by task name.
 
 ## Skills
 
-The `agent-station-executor` skill teaches any Claude Code agent how to:
+The `openstation-executor` skill teaches any Claude Code agent how to:
 
 1. **Read the assigned task** — parse frontmatter, understand requirements and verification
 2. **Load the workflow** — find the referenced workflow, determine current step
@@ -135,7 +135,7 @@ The `agent-station-executor` skill teaches any Claude Code agent how to:
 A human launches a Claude Code session:
 
 ```bash
-claude --agent agents/backend-engineer.md --skill skills/agent-station-executor.md
+claude --agent agents/backend-engineer.md --skill skills/openstation-executor.md
 ```
 
 The skill instructs the agent to:

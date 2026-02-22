@@ -9,7 +9,7 @@ created: 2026-02-21
 # Adopt Spec-Kit Patterns
 
 Implement patterns learned from GitHub's Spec-Kit research
-(see `tasks/0005-research-spec-kit-report.md`) that fit Agent
+(see `tasks/0005-research-spec-kit-report.md`) that fit Open
 Station's zero-dependency, convention-based philosophy.
 
 ## Subtasks

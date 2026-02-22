@@ -51,9 +51,9 @@ stripped. This is a known issue with no official fix. Workarounds
 include post-processing or using `vault.modify()` with manual YAML
 parsing.
 
-### Relevance to Agent Station
+### Relevance to Open Station
 
-Agent Station's convention (markdown + YAML frontmatter) maps
+Open Station's convention (markdown + YAML frontmatter) maps
 directly to the Vault API. A plugin could:
 
 - Enumerate tasks via `getMarkdownFiles()` + path filtering
@@ -72,13 +72,13 @@ Obsidian supports custom pane views by extending `ItemView`.
 ```typescript
 import { ItemView, WorkspaceLeaf } from "obsidian";
 
-const VIEW_TYPE = "agent-station-board";
+const VIEW_TYPE = "openstation-board";
 
 class TaskBoardView extends ItemView {
   constructor(leaf: WorkspaceLeaf) { super(leaf); }
 
   getViewType() { return VIEW_TYPE; }
-  getDisplayText() { return "Agent Station"; }
+  getDisplayText() { return "Open Station"; }
 
   async onOpen() {
     const el = this.contentEl;
@@ -187,7 +187,7 @@ without re-parsing YAML.
 | `file-open` | File opened in editor |
 | `layout-change` | Layout modified |
 
-### Relevance to Agent Station
+### Relevance to Open Station
 
 A plugin could listen to `vault.on("modify")` filtered to `tasks/`
 to auto-refresh a task board view whenever an agent (or the user)
@@ -200,7 +200,7 @@ parsing on each change.
 ## Feasibility Assessment
 
 **Verdict: Highly feasible.** The Obsidian plugin API covers every
-requirement for an Agent Station integration.
+requirement for an Open Station integration.
 
 ### Strengths
 

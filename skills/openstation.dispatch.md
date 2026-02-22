@@ -1,5 +1,5 @@
 ---
-name: agent-station.dispatch
+name: openstation.dispatch
 description: Preview agent details and show launch instructions for executing ready tasks. $ARGUMENTS = agent name. Use when user says "run agent", "start agent", "dispatch agent", or wants to launch an agent on its tasks.
 ---
 

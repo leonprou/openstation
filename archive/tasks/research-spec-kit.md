@@ -11,7 +11,7 @@ created: 2026-02-21
 ## Requirements
 
 Research GitHub's Spec-Kit (https://github.com/github/spec-kit) to
-understand what Agent Station can learn from it. Cover:
+understand what Open Station can learn from it. Cover:
 
 1. **Architecture deep-dive**: How does Spec-Kit structure its specs,
    plans, tasks, and constitution? File format, frontmatter schema,
@@ -30,11 +30,11 @@ understand what Agent Station can learn from it. Cover:
 5. **Task generation and dependency management**: How are specs
    broken into tasks? Do tasks have dependencies?
 
-6. **What Agent Station should adopt**: Concrete recommendations
+6. **What Open Station should adopt**: Concrete recommendations
    for patterns that work without runtime dependencies.
 
-7. **What Agent Station should NOT adopt**: Things that don't fit
-   Agent Station's zero-dependency philosophy.
+7. **What Open Station should NOT adopt**: Things that don't fit
+   Open Station's zero-dependency philosophy.
 
 ## Verification
 

@@ -1,5 +1,5 @@
 ---
-name: agent-station.list
+name: openstation.list
 description: List all tasks with status, agent, and dates. Supports filters via $ARGUMENTS (e.g., status:ready, agent:researcher). Use when user asks "what tasks exist", "show tasks", "task status", or wants a status overview.
 ---
 

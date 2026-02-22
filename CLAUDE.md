@@ -1,4 +1,4 @@
-# Agent Station
+# Open Station
 
 Task management system for coding AI agents. Pure convention —
 markdown specs + skills, zero runtime dependencies.
@@ -8,7 +8,7 @@ markdown specs + skills, zero runtime dependencies.
 ```
 tasks/           — Task specs (active work: backlog through review)
 agents/          — Agent specs (identity + skill references)
-skills/          — Agent Station skills (operational knowledge)
+skills/          — Open Station skills (operational knowledge)
 specs/           — Spec artifacts (from author and other agents)
 research/        — Research artifacts (from researcher)
 archive/tasks/   — Done task specs (all completed tasks)
@@ -30,7 +30,7 @@ minimum `kind` and `name` fields.
 3. Write Requirements and Verification sections in the body
 4. Set `status: ready` when the task is ready for an agent
 
-Use `/agent-station.create` to auto-assign the next ID.
+Use `/openstation.create` to auto-assign the next ID.
 
 ## Dispatching an Agent
 
@@ -38,7 +38,7 @@ Use `/agent-station.create` to auto-assign the next ID.
 claude --agent researcher
 ```
 
-The agent auto-loads the `agent-station-executor` skill (via the
+The agent auto-loads the `openstation-executor` skill (via the
 `skills` field in its frontmatter), finds its ready tasks, follows
 the manual, and executes.
 
@@ -57,7 +57,7 @@ The `owner` field in task frontmatter specifies who owns the task
 and is responsible for verification. Value is an agent name or
 `manual` (default). When an agent finishes work it sets
 `status: review` — only the designated owner may set `done` or
-`failed`. Use `/agent-station.done` to mark a task done and
+`failed`. Use `/openstation.done` to mark a task done and
 archive its spec and artifacts in one step.
 
 ## Artifacts
@@ -67,7 +67,7 @@ During execution, task outputs are stored alongside the task in
 `tasks/0003-my-task-notes.md`). For multiple artifacts, use a
 subdirectory: `tasks/<NNNN-task-name>/`.
 
-When a task passes verification, run `/agent-station.done` to mark
+When a task passes verification, run `/openstation.done` to mark
 it done and archive it in one step. The task spec is split from
 artifacts:
 
@@ -86,4 +86,4 @@ should only contain active work.
 - `.claude/agents/` symlinks to `agents/` for `--agent` resolution
 - `.claude/commands/` contains skill symlinks for slash command
   discovery
-- `skills/` is the source of truth for all Agent Station skills
+- `skills/` is the source of truth for all Open Station skills

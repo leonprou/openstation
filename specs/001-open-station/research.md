@@ -1,4 +1,4 @@
-# Research: Agent Station
+# Research: Open Station
 
 ## R1: Claude Code Agent Discovery
 
@@ -21,7 +21,7 @@ vault's flat-by-type structure while enabling Claude Code discovery.
 
 ## R2: Agent Spec Frontmatter
 
-**Decision**: Agent specs include both Agent Station fields (`kind`,
+**Decision**: Agent specs include both Open Station fields (`kind`,
 `name`) and Claude Code fields (`description`, `tools`, `model`,
 `skills`). Claude Code ignores unknown frontmatter fields.
 
@@ -36,11 +36,11 @@ name: researcher
 description: Research agent for gathering and analyzing information
 model: claude-sonnet-4-6
 skills:
-  - agent-station-executor
+  - openstation-executor
 ```
 
 **Alternatives considered**:
-- Separate Agent Station metadata from Claude Code metadata — adds
+- Separate Open Station metadata from Claude Code metadata — adds
   complexity with no benefit since extra fields are ignored.
 
 ## R3: Skill Discovery via Symlink
@@ -70,11 +70,11 @@ automatically when listed in the agent's `skills` frontmatter field.
 The `--agent` flag resolves the agent by name from `.claude/agents/`.
 
 The old design doc's command
-(`claude --agent agents/researcher.md --skill skills/agent-station-executor.md`)
+(`claude --agent agents/researcher.md --skill skills/openstation-executor.md`)
 is invalid — both flags are wrong.
 
 **Alternatives considered**:
-- Manual skill invocation via `/agent-station-executor` — requires
+- Manual skill invocation via `/openstation-executor` — requires
   the operator to type a slash command every session. The `skills`
   field in agent frontmatter auto-loads it.
 

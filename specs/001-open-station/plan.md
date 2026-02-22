@@ -1,11 +1,11 @@
-# Implementation Plan: Agent Station
+# Implementation Plan: Open Station
 
-**Branch**: `001-agent-station` | **Date**: 2026-02-21 | **Spec**: [spec.md](spec.md)
-**Input**: Feature specification from `specs/001-agent-station/spec.md`
+**Branch**: `001-open-station` | **Date**: 2026-02-21 | **Spec**: [spec.md](spec.md)
+**Input**: Feature specification from `specs/001-open-station/spec.md`
 
 ## Summary
 
-Build the Agent Station vault — directory structure, spec templates
+Build the Open Station vault — directory structure, spec templates
 (task + agent), the executor skill, a root-level manual, a sample
 agent and task, project CLAUDE.md, and the `.claude/commands/` symlink.
 Pure convention system: markdown files with YAML frontmatter, zero
@@ -44,7 +44,7 @@ runtime dependencies.
 ### Documentation (this feature)
 
 ```text
-specs/001-agent-station/
+specs/001-open-station/
 ├── plan.md
 ├── research.md
 ├── data-model.md
@@ -55,13 +55,13 @@ specs/001-agent-station/
 ### Source Code (repository root)
 
 ```text
-agent-station/
+openstation/
 ├── tasks/                    # Task specs
 │   └── research-obsidian-plugin-api.md  # Sample task
 ├── agents/                   # Agent specs
 │   └── researcher.md         # Sample agent
-├── skills/                   # Agent Station skills
-│   └── agent-station-executor.md
+├── skills/                   # Open Station skills
+│   └── openstation-executor.md
 ├── manual.md                 # Work process document
 ├── CLAUDE.md                 # Project instructions for Claude Code
 └── .claude/
@@ -84,7 +84,7 @@ Key discoveries that affect implementation (full details in
    `.claude/agents/`. Added `.claude/agents/` → `agents/` symlink.
 2. **No `--skill` flag**: Skills load via the `skills` field in agent
    frontmatter. Dispatch is simply `claude --agent researcher`.
-3. **Agent frontmatter**: Merges Agent Station fields (`kind`) with
+3. **Agent frontmatter**: Merges Open Station fields (`kind`) with
    Claude Code fields (`description`, `model`, `skills`). Extra
    fields are ignored by Claude Code.
 4. **Artifacts**: Stored alongside tasks in `tasks/`. Multi-artifact

@@ -30,7 +30,7 @@ Sync Impact Report
 - Follow-up TODOs: none
 -->
 
-# Agent Station Constitution
+# Open Station Constitution
 
 ## Core Principles
 
@@ -53,12 +53,12 @@ keeps the system inspectable by both humans and agents.
 
 ### II. Skills Are the Glue
 
-Agent Station operational knowledge MUST live in skills, not in
+Open Station operational knowledge MUST live in skills, not in
 agent specs. Agent specs define identity and capabilities; skills
 teach agents how to operate within the system.
 
-- Agent specs MUST NOT contain Agent Station-specific instructions.
-- The `agent-station-executor` skill MUST be the sole bridge
+- Agent specs MUST NOT contain Open Station-specific instructions.
+- The `openstation-executor` skill MUST be the sole bridge
   between agents and the system.
 - New system-level behaviors MUST be added as skills, not embedded
   in agent or task specs.
@@ -67,7 +67,7 @@ teach agents how to operate within the system.
   Claude Code discovers them natively.
 
 **Rationale**: Separating operational knowledge from agent identity
-allows any agent to participate in Agent Station by loading a skill,
+allows any agent to participate in Open Station by loading a skill,
 and allows the system to evolve without rewriting every agent spec.
 
 ### III. Obsidian Is the Database
@@ -128,7 +128,7 @@ without changing the core model.
   Requirements + Verification sections in the body. Set
   `status: ready` when the task is ready for an agent.
 - **Dispatching an agent**: Launch a Claude Code session with the
-  agent spec and the `agent-station-executor` skill. The agent
+  agent spec and the `openstation-executor` skill. The agent
   finds its ready tasks, follows the manual, and executes.
 - **Task lifecycle**: `backlog` → `ready` → `in-progress` → `done`
   (or `failed`). Agents update status in frontmatter as they work.

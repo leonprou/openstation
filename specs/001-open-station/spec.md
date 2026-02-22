@@ -1,9 +1,9 @@
-# Feature Specification: Agent Station
+# Feature Specification: Open Station
 
-**Feature Branch**: `001-agent-station`
+**Feature Branch**: `001-open-station`
 **Created**: 2026-02-21
 **Status**: Draft
-**Input**: User description: "build the agent-station"
+**Input**: User description: "build the openstation"
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -160,7 +160,7 @@ structure is self-explanatory.
 - **SC-002**: All system state is inspectable by opening the vault
   directory — no hidden state, no external dependencies.
 - **SC-003**: A new agent can participate in the system by referencing
-  the executor skill in its spec — no Agent Station-specific
+  the executor skill in its spec — no Open Station-specific
   instructions in the agent body.
 - **SC-004**: The entire system functions with zero runtime
   dependencies — no servers, no databases, no build steps.

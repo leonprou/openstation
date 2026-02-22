@@ -1,5 +1,5 @@
 ---
-name: agent-station.create
+name: openstation.create
 description: Create a new task spec in tasks/. $ARGUMENTS is the task description. Use when user says "add task", "new task", "create task", or describes work to be done.
 ---
 

@@ -11,7 +11,7 @@ created: 2026-02-21
 ## Requirements
 
 Create dedicated skills in `skills/` (with symlinks in
-`.claude/commands/`) for the main Agent Station operations. Each
+`.claude/commands/`) for the main Open Station operations. Each
 skill should be a standalone slash command the operator can invoke.
 
 ### Commands to create
@@ -46,7 +46,7 @@ skill should be a standalone slash command the operator can invoke.
   the skill file (e.g., `../../skills/task-list.md`).
 - Commands accept user input via `$ARGUMENTS`.
 - Commands should be concise — focus on the operation, not on
-  teaching the agent how Agent Station works (that's the executor
+  teaching the agent how Open Station works (that's the executor
   skill's job).
 
 ## Verification

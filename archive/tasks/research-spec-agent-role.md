@@ -11,7 +11,7 @@ created: 2026-02-21
 ## Requirements
 
 Investigate what kind of agent is best suited for authoring and
-maintaining Agent Station's core content — specifications, markdown
+maintaining Open Station's core content — specifications, markdown
 documentation, and skills. The research should cover:
 
 - **Role definition**: What capabilities does this agent need?

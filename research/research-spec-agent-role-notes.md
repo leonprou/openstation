@@ -8,7 +8,7 @@ Research artifact for task `0004-research-spec-agent-role`.
 
 ### What This Agent Does
 
-The agent authors and maintains Agent Station's core content:
+The agent authors and maintains Open Station's core content:
 task specs, agent specs, skills, and documentation (manual.md,
 CLAUDE.md). This is **structured content authoring** — not creative
 writing, not code generation, not research.
@@ -29,7 +29,7 @@ writing, not code generation, not research.
 
 - **Research** — gathering information is the researcher's job
 - **Decision-making** — the operator (human) decides what to build
-- **Code generation** — Agent Station is pure convention, no runtime code
+- **Code generation** — Open Station is pure convention, no runtime code
 - **Task execution** — the executor skill handles task lifecycle
 
 ---
@@ -41,12 +41,12 @@ writing, not code generation, not research.
 Current multi-agent architectures (2025–2026) consistently use
 role-based decomposition. The common roles:
 
-| Role | Responsibility | Agent Station Equivalent |
+| Role | Responsibility | Open Station Equivalent |
 |------|---------------|------------------------|
 | Planner | Decides what to do | Operator (human) |
 | Researcher | Gathers information | `researcher` agent |
 | Builder/Writer | Produces artifacts | **This new agent** |
-| Executor | Runs tasks | `agent-station.execute` skill |
+| Executor | Runs tasks | `openstation.execute` skill |
 | Reviewer | Validates output | Verification checklist (manual) |
 
 Sources: [ClickIT Multi-Agent Architecture Guide](https://www.clickittech.com/ai/multi-agent-system-architecture/), [Botpress Multi-Agent Systems Guide](https://botpress.com/blog/multi-agent-systems), [O'Reilly Effective Multi-Agent Architectures](https://www.oreilly.com/radar/designing-effective-multi-agent-architectures/)
@@ -58,11 +58,11 @@ The Claude Code ecosystem has established patterns for writing agents:
 **VoltAgent `documentation-engineer`**: Uses Haiku model, tools
 `Read, Write, Edit, Glob, Grep, WebFetch, WebSearch`. Focuses on
 API docs, tutorials, and documentation systems. Overly broad for
-Agent Station — designed for large doc ecosystems, not spec files.
+Open Station — designed for large doc ecosystems, not spec files.
 
 **VoltAgent `technical-writer`**: Also Haiku, same tool set. Focuses
 on user guides, SDK docs, getting-started content. Again broader
-than what Agent Station needs.
+than what Open Station needs.
 
 **Spec-Driven Development (Agent Factory)**: Treats specs as the
 primary artifact. Spec writers create comprehensive blueprints that
@@ -74,7 +74,7 @@ Source: [VoltAgent Awesome Claude Code Subagents](https://github.com/VoltAgent/a
 
 ### Key Insight
 
-No existing pattern exactly matches what Agent Station needs.
+No existing pattern exactly matches what Open Station needs.
 Documentation writers are too broad. Spec-driven development agents
 write implementation specs, not operational ones. The closest
 analogy is a **technical editor** who works within a strict format
@@ -211,19 +211,19 @@ artifacts" without implying code or creativity.
 kind: agent
 name: author
 description: >-
-  Structured content author for Agent Station vault artifacts —
+  Structured content author for Open Station vault artifacts —
   task specs, agent specs, skills, and documentation. Follows
   vault conventions exactly.
 model: claude-sonnet-4-6
 skills:
-  - agent-station.execute
+  - openstation.execute
 ---
 ```
 
 ```markdown
 # Author
 
-You are a structured content author for Agent Station. Your job
+You are a structured content author for Open Station. Your job
 is to create and maintain vault artifacts: task specs, agent specs,
 skills, and documentation.
 

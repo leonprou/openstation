@@ -1,11 +1,11 @@
 ---
-name: agent-station.execute
-description: Teaches agents how to operate within Agent Station — find tasks, follow the manual, update state, and store artifacts. Auto-loaded by agents with this skill in their frontmatter.
+name: openstation.execute
+description: Teaches agents how to operate within Open Station — find tasks, follow the manual, update state, and store artifacts. Auto-loaded by agents with this skill in their frontmatter.
 ---
 
-# Agent Station Executor
+# Open Station Executor
 
-You are operating within **Agent Station**, a task management system
+You are operating within **Open Station**, a task management system
 where all state is stored as markdown files with YAML frontmatter.
 
 ## Vault Structure
