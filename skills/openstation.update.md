@@ -28,7 +28,8 @@ The task name can be either the full ID-prefixed name (e.g.,
    - If still not found, report an error and list available tasks.
 3. Read the current frontmatter.
 4. Validate each field:value pair:
-   - `status` must be one of: backlog, ready, in-progress, review, failed.
+   - `status` must be a valid status per `.openstation/workflow.md`
+     (backlog, ready, in-progress, review, failed).
      **`status:done` is not allowed via update** — use
      `/openstation.done` instead, which sets the status and
      archives the task in one step. Reject with an error message.

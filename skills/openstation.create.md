@@ -24,7 +24,9 @@ Generate a new task spec from a description.
    - If no prefixed files exist, start at `0001`.
 4. The filename becomes `<ID>-<slug>.md` and the `name` field
    matches `<ID>-<slug>`.
-5. Create `.openstation/tasks/<ID>-<slug>.md` with this structure:
+5. Create `.openstation/tasks/<ID>-<slug>.md` with this structure
+   (see `.openstation/workflow.md` for status definitions and
+   lifecycle rules):
 
    ```markdown
    ---

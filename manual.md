@@ -32,34 +32,16 @@ executing tasks within Open Station.
 
 ### 3. Store Artifacts
 
-- Artifacts are outputs produced during task execution (research
-  notes, code changes, reports, etc.).
-- Store artifacts alongside the task in `.openstation/tasks/`:
-  - **Single artifact**: Place the artifact file next to the task
-    file, sharing the task's ID prefix (e.g.,
-    `.openstation/tasks/0003-my-task-notes.md` for task `0003-my-task`).
-  - **Multiple artifacts**: Create a subdirectory named after the
-    task containing the task spec and all artifacts:
-    ```
-    .openstation/tasks/0003-my-task/
-    ├── 0003-my-task.md      # task spec
-    ├── research-notes.md    # artifact
-    └── implementation.md    # artifact
-    ```
-- Artifact files are markdown. Include enough context that the
-  artifact is useful on its own.
+- Store artifacts alongside the task in `.openstation/tasks/`.
+- See `.openstation/workflow.md` § "Artifact Storage" for naming
+  conventions (single file vs subdirectory).
 
 ## Sub-Tasks
 
-If a task requires decomposition into smaller pieces:
-
-1. Create a new task file in `.openstation/tasks/` using the create skill
-   (`/openstation.create`) to auto-assign the next ID.
-2. Set `parent: <current-task-name>` in frontmatter.
-3. Set `status: backlog` (or `ready` if it can be executed
-   immediately).
-4. Assign an `agent`.
-5. Sub-tasks must be completed before the parent task can proceed.
+If a task requires decomposition, use `/openstation.create` to
+create sub-tasks and set `parent: <current-task-name>` in their
+frontmatter. See `.openstation/workflow.md` § "Sub-Tasks" for
+blocking rules and lifecycle dependency.
 
 ## Completing a Task
 
@@ -70,6 +52,9 @@ After working through all requirements:
    field) handles verification from here.
 3. Do **not** self-verify or set `done`/`failed` — that is the
    owner's responsibility.
+
+See `.openstation/workflow.md` for valid status transitions and
+ownership rules.
 
 ## Verifying a Task
 
@@ -106,19 +91,8 @@ keeps the directory as a clean active work queue.
 
 ### Routing Rules
 
-The task spec is split from artifacts:
-
-| What | Destination |
-|------|-------------|
-| Task spec (always) | `.openstation/archive/tasks/` |
-| Artifacts from `researcher` | `.openstation/research/` |
-| Artifacts from other agents | `.openstation/specs/` |
-| No agent (no artifacts) | just `.openstation/archive/tasks/` |
-
-The `NNNN-` ID prefix is stripped from filenames during promotion.
-
-`.openstation/tasks/` should only contain active work (`backlog` through
-`review`).
+See `.openstation/workflow.md` § "Artifact Promotion" for the
+routing table, ID prefix stripping, and destination rules.
 
 ## Updating Frontmatter
 

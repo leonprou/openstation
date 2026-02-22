@@ -163,6 +163,13 @@ printf 'Installing manual...\n'
 fetch_file "manual.md" ".openstation/manual.md"
 info ".openstation/manual.md"
 
+# --- Download workflow.md (always overwrite — AS-owned) -------------------
+
+printf 'Installing workflow...\n'
+
+fetch_file "workflow.md" ".openstation/workflow.md"
+info ".openstation/workflow.md"
+
 # --- Download example agents (skip if exist) -----------------------------
 
 if [[ "$INSTALL_AGENTS" == true ]]; then
@@ -225,6 +232,7 @@ markdown specs + skills, zero runtime dependencies.
 ├── specs/           — Spec artifacts (from author and other agents)
 ├── research/        — Research artifacts (from researcher)
 ├── archive/tasks/   — Done task specs (all completed tasks)
+├── workflow.md      — Lifecycle rules (statuses, ownership, artifacts)
 └── manual.md        — Work process agents follow
 ```
 
@@ -236,7 +244,8 @@ Update a task:  `/openstation.update <name> field:value`
 Run an agent:   `claude --agent <name>`
 Complete task:  `/openstation.done <name>`
 
-See `.openstation/manual.md` for the full work process.
+See `.openstation/workflow.md` for lifecycle rules and
+`.openstation/manual.md` for the work process.
 <!-- openstation:end -->
 SECTION
 

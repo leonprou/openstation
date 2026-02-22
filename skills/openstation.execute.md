@@ -18,20 +18,23 @@ where all state is stored as markdown files with YAML frontmatter.
 ├── specs/          — Spec artifacts (from author and other agents)
 ├── research/       — Research artifacts (from researcher)
 ├── archive/tasks/  — Done task specs (all completed tasks)
-└── manual.md       — Work process (source of truth)
+├── workflow.md     — Lifecycle rules (statuses, ownership, artifacts)
+└── manual.md       — Work process (procedural steps)
 ```
 
 ## On Startup
 
 1. Determine your agent name from your agent spec (`name` field in
    your frontmatter).
-2. Read `.openstation/manual.md` — this is your work process.
+2. Read `.openstation/workflow.md` for lifecycle rules (statuses,
+   ownership, artifact routing).
+3. Read `.openstation/manual.md` — this is your work process.
    Follow it exactly.
-3. Scan all files in `.openstation/tasks/` for specs where `agent` matches your
+4. Scan all files in `.openstation/tasks/` for specs where `agent` matches your
    name AND `status` is `ready`.
-4. If multiple ready tasks exist, pick the one with the earliest
+5. If multiple ready tasks exist, pick the one with the earliest
    `created` date.
-5. If no ready tasks exist, report: "No ready tasks assigned to
+6. If no ready tasks exist, report: "No ready tasks assigned to
    agent [name]." and stop.
 
 ## Executing
