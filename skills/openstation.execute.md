@@ -11,22 +11,23 @@ where all state is stored as markdown files with YAML frontmatter.
 ## Vault Structure
 
 ```
-tasks/          — Task specs (active work: backlog through review)
-agents/         — Agent specs (agent definitions)
-skills/         — Skills (including this one)
-specs/          — Spec artifacts (from author and other agents)
-research/       — Research artifacts (from researcher)
-archive/tasks/  — Done task specs (all completed tasks)
-manual.md       — Work process (source of truth)
+.openstation/
+├── tasks/          — Task specs (active work: backlog through review)
+├── agents/         — Agent specs (agent definitions)
+├── skills/         — Skills (including this one)
+├── specs/          — Spec artifacts (from author and other agents)
+├── research/       — Research artifacts (from researcher)
+├── archive/tasks/  — Done task specs (all completed tasks)
+└── manual.md       — Work process (source of truth)
 ```
 
 ## On Startup
 
 1. Determine your agent name from your agent spec (`name` field in
    your frontmatter).
-2. Read `manual.md` at the vault root — this is your work process.
+2. Read `.openstation/manual.md` — this is your work process.
    Follow it exactly.
-3. Scan all files in `tasks/` for specs where `agent` matches your
+3. Scan all files in `.openstation/tasks/` for specs where `agent` matches your
    name AND `status` is `ready`.
 4. If multiple ready tasks exist, pick the one with the earliest
    `created` date.
@@ -35,7 +36,7 @@ manual.md       — Work process (source of truth)
 
 ## Executing
 
-Follow the process described in `manual.md` for:
+Follow the process described in `.openstation/manual.md` for:
 - Loading task context
 - Working through requirements
 - Storing artifacts
@@ -43,5 +44,5 @@ Follow the process described in `manual.md` for:
 - Completing and verifying the task
 - Updating frontmatter
 
-`manual.md` is the single source of truth for the work process.
+`.openstation/manual.md` is the single source of truth for the work process.
 Do not deviate from it.

@@ -13,10 +13,10 @@ Show agent details and instruct the user how to launch it.
 
 ## Procedure
 
-1. Validate that `agents/<name>.md` exists. If not, report an error
-   and list available agents from `agents/`.
+1. Validate that `.openstation/agents/<name>.md` exists. If not, report an error
+   and list available agents from `.openstation/agents/`.
 2. Read and display the agent spec (name, description, model, skills).
-3. Scan `tasks/` for tasks where `agent` matches this name AND
+3. Scan `.openstation/tasks/` for tasks where `agent` matches this name AND
    `status` is `ready`. Display them in a short list.
 4. If no ready tasks exist, report: "No ready tasks for agent
    <name>." and stop.

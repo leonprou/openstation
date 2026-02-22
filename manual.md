@@ -7,7 +7,7 @@ executing tasks within Open Station.
 
 1. Determine your agent name from your agent spec (the `name` field
    in your frontmatter).
-2. Scan all files in `tasks/` for specs where `agent` matches your
+2. Scan all files in `.openstation/tasks/` for specs where `agent` matches your
    name AND `status` is `ready`.
 3. If multiple ready tasks exist, pick the one with the earliest
    `created` date.
@@ -34,14 +34,14 @@ executing tasks within Open Station.
 
 - Artifacts are outputs produced during task execution (research
   notes, code changes, reports, etc.).
-- Store artifacts alongside the task in `tasks/`:
+- Store artifacts alongside the task in `.openstation/tasks/`:
   - **Single artifact**: Place the artifact file next to the task
     file, sharing the task's ID prefix (e.g.,
-    `tasks/0003-my-task-notes.md` for task `0003-my-task`).
+    `.openstation/tasks/0003-my-task-notes.md` for task `0003-my-task`).
   - **Multiple artifacts**: Create a subdirectory named after the
     task containing the task spec and all artifacts:
     ```
-    tasks/0003-my-task/
+    .openstation/tasks/0003-my-task/
     ├── 0003-my-task.md      # task spec
     ├── research-notes.md    # artifact
     └── implementation.md    # artifact
@@ -53,7 +53,7 @@ executing tasks within Open Station.
 
 If a task requires decomposition into smaller pieces:
 
-1. Create a new task file in `tasks/` using the create skill
+1. Create a new task file in `.openstation/tasks/` using the create skill
    (`/openstation.create`) to auto-assign the next ID.
 2. Set `parent: <current-task-name>` in frontmatter.
 3. Set `status: backlog` (or `ready` if it can be executed
@@ -101,7 +101,7 @@ If `owner` is `manual` (the default), a human operator:
 ## Completing & Archiving
 
 When a task passes verification, run `/openstation.done <task-name>`
-to mark it done and move it out of `tasks/` in a single step. This
+to mark it done and move it out of `.openstation/tasks/` in a single step. This
 keeps the directory as a clean active work queue.
 
 ### Routing Rules
@@ -110,14 +110,14 @@ The task spec is split from artifacts:
 
 | What | Destination |
 |------|-------------|
-| Task spec (always) | `archive/tasks/` |
-| Artifacts from `researcher` | `research/` |
-| Artifacts from other agents | `specs/` |
-| No agent (no artifacts) | just `archive/tasks/` |
+| Task spec (always) | `.openstation/archive/tasks/` |
+| Artifacts from `researcher` | `.openstation/research/` |
+| Artifacts from other agents | `.openstation/specs/` |
+| No agent (no artifacts) | just `.openstation/archive/tasks/` |
 
 The `NNNN-` ID prefix is stripped from filenames during promotion.
 
-`tasks/` should only contain active work (`backlog` through
+`.openstation/tasks/` should only contain active work (`backlog` through
 `review`).
 
 ## Updating Frontmatter

@@ -41,7 +41,7 @@ This creates the vault directories, installs skills and the manual, sets up syml
 claude --agent researcher
 ```
 
-The agent finds its ready tasks, follows `manual.md`, executes the work, and sets `status: review` when done.
+The agent finds its ready tasks, follows `.openstation/manual.md`, executes the work, and sets `status: review` when done.
 
 **4. Mark done**
 
@@ -54,13 +54,14 @@ Archives the task spec and promotes artifacts to the correct destination.
 ## Vault Structure
 
 ```
-tasks/           — Task specs (active work: backlog through review)
-agents/          — Agent specs (identity + skill references)
-skills/          — Open Station skills (operational knowledge)
-specs/           — Spec artifacts (from author and other agents)
-research/        — Research artifacts (from researcher)
-archive/tasks/   — Done task specs (all completed tasks)
-manual.md        — Work process agents follow
+.openstation/
+├── tasks/           — Task specs (active work: backlog through review)
+├── agents/          — Agent specs (identity + skill references)
+├── skills/          — Open Station skills (operational knowledge)
+├── specs/           — Spec artifacts (from author and other agents)
+├── research/        — Research artifacts (from researcher)
+├── archive/tasks/   — Done task specs (all completed tasks)
+└── manual.md        — Work process agents follow
 ```
 
 ## Commands

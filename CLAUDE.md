@@ -6,13 +6,14 @@ markdown specs + skills, zero runtime dependencies.
 ## Vault Structure
 
 ```
-tasks/           — Task specs (active work: backlog through review)
-agents/          — Agent specs (identity + skill references)
-skills/          — Open Station skills (operational knowledge)
-specs/           — Spec artifacts (from author and other agents)
-research/        — Research artifacts (from researcher)
-archive/tasks/   — Done task specs (all completed tasks)
-manual.md        — Work process agents follow
+.openstation/
+├── tasks/           — Task specs (active work: backlog through review)
+├── agents/          — Agent specs (identity + skill references)
+├── skills/          — Open Station skills (operational knowledge)
+├── specs/           — Spec artifacts (from author and other agents)
+├── research/        — Research artifacts (from researcher)
+├── archive/tasks/   — Done task specs (all completed tasks)
+└── manual.md        — Work process agents follow
 ```
 
 ## Spec Format
@@ -23,7 +24,7 @@ minimum `kind` and `name` fields.
 
 ## Creating a New Task
 
-1. Create a file in `tasks/` named `NNNN-kebab-case-name.md` where
+1. Create a file in `.openstation/tasks/` named `NNNN-kebab-case-name.md` where
    `NNNN` is the next available 4-digit auto-incrementing ID
 2. Add frontmatter: `kind: task`, `name: NNNN-kebab-case-name`,
    `status: backlog`, `agent`, `owner: manual`, `created`
@@ -63,9 +64,9 @@ archive its spec and artifacts in one step.
 ## Artifacts
 
 During execution, task outputs are stored alongside the task in
-`tasks/`. Artifact files share the parent task's ID prefix (e.g.,
-`tasks/0003-my-task-notes.md`). For multiple artifacts, use a
-subdirectory: `tasks/<NNNN-task-name>/`.
+`.openstation/tasks/`. Artifact files share the parent task's ID prefix (e.g.,
+`.openstation/tasks/0003-my-task-notes.md`). For multiple artifacts, use a
+subdirectory: `.openstation/tasks/<NNNN-task-name>/`.
 
 When a task passes verification, run `/openstation.done` to mark
 it done and archive it in one step. The task spec is split from
@@ -73,17 +74,17 @@ artifacts:
 
 | What | Destination |
 |------|-------------|
-| Task spec (always) | `archive/tasks/` |
-| Artifacts from `researcher` | `research/` |
-| Artifacts from other agents | `specs/` |
-| No agent (no artifacts) | just `archive/tasks/` |
+| Task spec (always) | `.openstation/archive/tasks/` |
+| Artifacts from `researcher` | `.openstation/research/` |
+| Artifacts from other agents | `.openstation/specs/` |
+| No agent (no artifacts) | just `.openstation/archive/tasks/` |
 
-The `NNNN-` ID prefix is stripped during promotion. `tasks/`
+The `NNNN-` ID prefix is stripped during promotion. `.openstation/tasks/`
 should only contain active work.
 
 ## Discovery
 
-- `.claude/agents/` symlinks to `agents/` for `--agent` resolution
+- `.claude/agents/` symlinks to `.openstation/agents/` for `--agent` resolution
 - `.claude/commands/` contains skill symlinks for slash command
   discovery
-- `skills/` is the source of truth for all Open Station skills
+- `.openstation/skills/` is the source of truth for all Open Station skills
