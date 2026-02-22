@@ -96,6 +96,33 @@ If `owner` is `manual` (the default), a human operator:
 2. Runs through the **Verification** checklist.
 3. Sets `status: done` or `status: failed` accordingly.
 
+## Promoting Completed Work
+
+When a task reaches `status: done`, promote it out of `tasks/` so
+the directory remains a clean active work queue.
+
+Run `/agent-station.promote <task-name>` to move the task spec and
+its artifacts to the correct destination.
+
+### Routing Rules
+
+The task spec is split from artifacts:
+
+| What | Destination |
+|------|-------------|
+| Task spec (always) | `archive/tasks/` |
+| Artifacts from `researcher` | `research/` |
+| Artifacts from other agents | `specs/` |
+| No agent (no artifacts) | just `archive/tasks/` |
+
+The `NNNN-` ID prefix is stripped from filenames during promotion.
+
+### When to Promote
+
+- After verifying a task as `done`, promote it immediately.
+- `tasks/` should only contain active work (`backlog` through
+  `review`).
+
 ## Updating Frontmatter
 
 When modifying YAML frontmatter in task specs:

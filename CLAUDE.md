@@ -6,11 +6,12 @@ markdown specs + skills, zero runtime dependencies.
 ## Vault Structure
 
 ```
-tasks/           — Task specs (status tracked in frontmatter)
+tasks/           — Task specs (active work: backlog through review)
 agents/          — Agent specs (identity + skill references)
 skills/          — Agent Station skills (operational knowledge)
-projects/        — Project artifacts (grouped by project)
-research/        — General research artifacts (not project-specific)
+specs/           — Spec artifacts (from author and other agents)
+research/        — Research artifacts (from researcher)
+archive/tasks/   — Done task specs (all completed tasks)
 manual.md        — Work process agents follow
 ```
 
@@ -61,10 +62,23 @@ promoted according to the workflow.
 
 ## Artifacts
 
-Task outputs are stored alongside the task in `tasks/`. Artifact
-files share the parent task's ID prefix (e.g.,
+During execution, task outputs are stored alongside the task in
+`tasks/`. Artifact files share the parent task's ID prefix (e.g.,
 `tasks/0003-my-task-notes.md`). For multiple artifacts, use a
 subdirectory: `tasks/<NNNN-task-name>/`.
+
+When a task reaches `status: done`, promote it with
+`/agent-station.promote`. The task spec is split from artifacts:
+
+| What | Destination |
+|------|-------------|
+| Task spec (always) | `archive/tasks/` |
+| Artifacts from `researcher` | `research/` |
+| Artifacts from other agents | `specs/` |
+| No agent (no artifacts) | just `archive/tasks/` |
+
+The `NNNN-` ID prefix is stripped during promotion. `tasks/`
+should only contain active work.
 
 ## Discovery
 

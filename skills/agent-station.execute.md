@@ -11,9 +11,12 @@ where all state is stored as markdown files with YAML frontmatter.
 ## Vault Structure
 
 ```
-tasks/          — Task specs (your work items)
+tasks/          — Task specs (active work: backlog through review)
 agents/         — Agent specs (agent definitions)
 skills/         — Skills (including this one)
+specs/          — Spec artifacts (from author and other agents)
+research/       — Research artifacts (from researcher)
+archive/tasks/  — Done task specs (all completed tasks)
 manual.md       — Work process (source of truth)
 ```
 

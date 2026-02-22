@@ -17,11 +17,14 @@ promoted out of `tasks/` to the appropriate destination, keeping
 
 ### Routing rules
 
-| Agent field | Destination |
-|-------------|-------------|
-| `researcher` | `research/` |
-| other agents (`author`, etc.) | `projects/` |
-| no agent | `archived/` |
+Task specs are split from artifacts:
+
+| What | Destination |
+|------|-------------|
+| Task spec (always) | `archive/tasks/` |
+| Artifacts from `researcher` | `research/` |
+| Artifacts from other agents | `specs/` |
+| No agent (no artifacts) | just `archive/tasks/` |
 
 ### File naming
 
@@ -42,36 +45,35 @@ the ID from the directory name.
    to `../../skills/agent-station.promote.md`.
 
 3. **Update `manual.md`** — add "Promoting Completed Work" section
-   after "Verifying a Task" with routing rules and instructions
-   to run `/agent-station.promote` after verification.
+   after "Verifying a Task" with split routing rules.
 
-4. **Update `CLAUDE.md`** — update Artifacts section to document
-   the promotion flow. Add `archived/` to vault structure.
+4. **Update `CLAUDE.md`** — update Artifacts section and vault
+   structure to reflect `specs/`, `archive/tasks/`.
 
-5. **Update `projects/manual.md`** — note that completed
-   project-type tasks are promoted here.
+5. **Create `archive/tasks/`** — directory for all completed task
+   specs.
 
-6. **Create `archived/` directory** — new top-level directory for
-   completed operational tasks.
+6. **Update `skills/agent-station.execute.md`** — update vault
+   structure listing to reflect `specs/`, `archive/tasks/`.
 
-7. **Update `skills/agent-station.execute.md`** — add `research/`,
-   `projects/`, and `archived/` to the vault structure listing.
-
-8. **Migrate existing done tasks**:
-   - `0001-add-operator-commands` (no agent) → `archived/`
-   - `0002-update-vault-structure` (no agent) → `archived/`
-   - `0003-research-obsidian-plugin-api` + notes (researcher) → `research/`
-   - `0004-research-spec-agent-role` + notes (researcher) → `research/`
-   - `0005-research-spec-kit` + report (researcher) → `research/`
-   - `0007-add-verifier-field` (author) → `projects/`
+7. **Migrate existing done tasks** (split spec from artifacts):
+   - `0001-add-operator-commands` spec → `archive/tasks/`
+   - `0002-update-vault-structure` spec → `archive/tasks/`
+   - `0003-research-obsidian-plugin-api` spec → `archive/tasks/`,
+     notes artifact → `research/`
+   - `0004-research-spec-agent-role` spec → `archive/tasks/`,
+     notes artifact → `research/`
+   - `0005-research-spec-kit` spec → `archive/tasks/`,
+     report artifact → `research/`
+   - `0007-add-verifier-field` spec → `archive/tasks/`
 
 ## Verification
 
 - [ ] `/agent-station.promote` skill exists and symlink works
-- [ ] Manual has "Promoting Completed Work" section with routing rules
-- [ ] CLAUDE.md documents promotion flow and `archived/` in vault structure
-- [ ] All 7 done tasks migrated to correct destinations
+- [ ] Manual has "Promoting Completed Work" section with split routing
+- [ ] CLAUDE.md documents split promotion and new vault structure
+- [ ] All done task specs in `archive/tasks/` (6 files)
+- [ ] `research/` has 3 artifact files (notes + report), no task specs
+- [ ] `specs/` has `001-agent-station/` (unchanged)
+- [ ] `projects/` and `archived/` directories removed
 - [ ] `tasks/` contains only active tasks (0006, 0008)
-- [ ] `research/` has 6 files (3 specs + 3 artifacts)
-- [ ] `projects/` has `manual.md` + `add-verifier-field.md`
-- [ ] `archived/` has 2 files
