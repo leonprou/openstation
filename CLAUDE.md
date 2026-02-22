@@ -57,8 +57,8 @@ The `owner` field in task frontmatter specifies who owns the task
 and is responsible for verification. Value is an agent name or
 `manual` (default). When an agent finishes work it sets
 `status: review` — only the designated owner may set `done` or
-`failed`. When a task reaches `done`, its spec and artifacts are
-promoted according to the workflow.
+`failed`. Use `/agent-station.done` to mark a task done and
+archive its spec and artifacts in one step.
 
 ## Artifacts
 
@@ -67,8 +67,9 @@ During execution, task outputs are stored alongside the task in
 `tasks/0003-my-task-notes.md`). For multiple artifacts, use a
 subdirectory: `tasks/<NNNN-task-name>/`.
 
-When a task reaches `status: done`, promote it with
-`/agent-station.promote`. The task spec is split from artifacts:
+When a task passes verification, run `/agent-station.done` to mark
+it done and archive it in one step. The task spec is split from
+artifacts:
 
 | What | Destination |
 |------|-------------|

@@ -28,7 +28,10 @@ The task name can be either the full ID-prefixed name (e.g.,
    - If still not found, report an error and list available tasks.
 3. Read the current frontmatter.
 4. Validate each field:value pair:
-   - `status` must be one of: backlog, ready, in-progress, review, done, failed
+   - `status` must be one of: backlog, ready, in-progress, review, failed.
+     **`status:done` is not allowed via update** — use
+     `/agent-station.done` instead, which sets the status and
+     archives the task in one step. Reject with an error message.
    - `agent` should match an agent in `agents/` (warn if not found,
      but allow it)
    - `owner` should be an agent name or `manual` (warn if agent

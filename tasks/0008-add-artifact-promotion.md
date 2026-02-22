@@ -34,15 +34,15 @@ the ID from the directory name.
 
 ### Deliverables
 
-1. **Create `skills/agent-station.promote.md`** — new skill that
-   promotes a done task to the correct destination. Input is the
-   task name. Procedure: locate task, verify done status, find
-   associated files (same ID prefix or subdirectory), determine
-   destination from agent field, strip ID prefix, move files,
-   confirm.
+1. **Create `skills/agent-station.done.md`** — skill that marks a
+   task done and promotes it to the correct destination. Input is
+   the task name. Procedure: locate task, verify review status, set
+   done, find associated files (same ID prefix or subdirectory),
+   determine destination from agent field, strip ID prefix, move
+   files, confirm.
 
-2. **Create `.claude/commands/agent-station.promote.md`** — symlink
-   to `../../skills/agent-station.promote.md`.
+2. **Create `.claude/commands/agent-station.done.md`** — symlink
+   to `../../skills/agent-station.done.md`.
 
 3. **Update `manual.md`** — add "Promoting Completed Work" section
    after "Verifying a Task" with split routing rules.
@@ -69,7 +69,7 @@ the ID from the directory name.
 
 ## Verification
 
-- [ ] `/agent-station.promote` skill exists and symlink works
+- [ ] `/agent-station.done` skill exists and symlink works
 - [ ] Manual has "Promoting Completed Work" section with split routing
 - [ ] CLAUDE.md documents split promotion and new vault structure
 - [ ] All done task specs in `archive/tasks/` (6 files)

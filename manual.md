@@ -84,7 +84,8 @@ If `owner` is an agent name, that agent:
 1. Reads the task spec and its **Verification** section.
 2. Checks each verification item against the artifacts and changes
    produced.
-3. If ALL items pass: set `status: done`.
+3. If ALL items pass: run `/agent-station.done <task-name>` to mark
+   the task done and archive it.
 4. If ANY item fails: set `status: failed` and document which items
    failed and why (add a note in the task body or as an artifact).
 
@@ -94,15 +95,14 @@ If `owner` is `manual` (the default), a human operator:
 
 1. Reviews the task's artifacts and changes.
 2. Runs through the **Verification** checklist.
-3. Sets `status: done` or `status: failed` accordingly.
+3. If all items pass: run `/agent-station.done <task-name>`.
+4. If any item fails: set `status: failed` accordingly.
 
-## Promoting Completed Work
+## Completing & Archiving
 
-When a task reaches `status: done`, promote it out of `tasks/` so
-the directory remains a clean active work queue.
-
-Run `/agent-station.promote <task-name>` to move the task spec and
-its artifacts to the correct destination.
+When a task passes verification, run `/agent-station.done <task-name>`
+to mark it done and move it out of `tasks/` in a single step. This
+keeps the directory as a clean active work queue.
 
 ### Routing Rules
 
@@ -117,11 +117,8 @@ The task spec is split from artifacts:
 
 The `NNNN-` ID prefix is stripped from filenames during promotion.
 
-### When to Promote
-
-- After verifying a task as `done`, promote it immediately.
-- `tasks/` should only contain active work (`backlog` through
-  `review`).
+`tasks/` should only contain active work (`backlog` through
+`review`).
 
 ## Updating Frontmatter
 
