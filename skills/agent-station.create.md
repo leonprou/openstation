@@ -32,7 +32,7 @@ Generate a new task spec from a description.
    name: <ID>-<slug>
    status: backlog
    agent:
-   verifier: manual
+   owner: manual
    created: <today's date YYYY-MM-DD>
    ---
 

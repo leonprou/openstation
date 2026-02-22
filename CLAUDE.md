@@ -25,7 +25,7 @@ minimum `kind` and `name` fields.
 1. Create a file in `tasks/` named `NNNN-kebab-case-name.md` where
    `NNNN` is the next available 4-digit auto-incrementing ID
 2. Add frontmatter: `kind: task`, `name: NNNN-kebab-case-name`,
-   `status: backlog`, `agent`, `verifier: manual`, `created`
+   `status: backlog`, `agent`, `owner: manual`, `created`
 3. Write Requirements and Verification sections in the body
 4. Set `status: ready` when the task is ready for an agent
 
@@ -50,12 +50,14 @@ the manual, and executes.
 - `done` — verification passed
 - `failed` — verification failed
 
-## Verifier Field
+## Owner Field
 
-The `verifier` field in task frontmatter specifies who verifies the
-task. Value is an agent name or `manual` (default). When an agent
-finishes work it sets `status: review` — only the designated
-verifier may set `done` or `failed`.
+The `owner` field in task frontmatter specifies who owns the task
+and is responsible for verification. Value is an agent name or
+`manual` (default). When an agent finishes work it sets
+`status: review` — only the designated owner may set `done` or
+`failed`. When a task reaches `done`, its spec and artifacts are
+promoted according to the workflow.
 
 ## Artifacts
 

@@ -66,20 +66,20 @@ If a task requires decomposition into smaller pieces:
 After working through all requirements:
 
 1. Update task frontmatter: `status: review`.
-2. The designated verifier (specified in the task's `verifier`
+2. The designated owner (specified in the task's `owner`
    field) handles verification from here.
 3. Do **not** self-verify or set `done`/`failed` — that is the
-   verifier's responsibility.
+   owner's responsibility.
 
 ## Verifying a Task
 
-Only the designated verifier may approve or reject a task. The
-`verifier` field in task frontmatter names the verifier — either
+Only the designated owner may approve or reject a task. The
+`owner` field in task frontmatter names the owner — either
 an agent name or `manual` (meaning a human verifies).
 
-### Agent Verifier
+### Agent Owner
 
-If `verifier` is an agent name, that agent:
+If `owner` is an agent name, that agent:
 
 1. Reads the task spec and its **Verification** section.
 2. Checks each verification item against the artifacts and changes
@@ -88,9 +88,9 @@ If `verifier` is an agent name, that agent:
 4. If ANY item fails: set `status: failed` and document which items
    failed and why (add a note in the task body or as an artifact).
 
-### Manual Verifier
+### Manual Owner
 
-If `verifier` is `manual` (the default), a human operator:
+If `owner` is `manual` (the default), a human operator:
 
 1. Reviews the task's artifacts and changes.
 2. Runs through the **Verification** checklist.

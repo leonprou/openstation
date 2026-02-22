@@ -24,9 +24,9 @@ If no arguments provided, show all tasks.
 2. Parse YAML frontmatter from each file.
 3. Apply any filters from `$ARGUMENTS`.
 4. Display a markdown table with columns:
-   | ID | Task | Status | Agent | Verifier | Created |
+   | ID | Task | Status | Agent | Owner | Created |
    The ID column shows the 4-digit numeric prefix extracted from the
-   filename (e.g., `0003`). The Verifier column shows the `verifier`
+   filename (e.g., `0003`). The Owner column shows the `owner`
    field value (default `manual` if absent).
 5. Sort by ID (ascending) as primary sort.
 6. Below the table, show summary counts:
