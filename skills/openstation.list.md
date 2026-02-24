@@ -5,7 +5,7 @@ description: List all tasks with status, agent, and dates. Supports filters via 
 
 # List Tasks
 
-Scan all `.md` files in `.openstation/tasks/` and display them as a markdown table.
+Scan all `.md` files in `tasks/` and display them as a markdown table.
 
 ## Input
 
@@ -19,7 +19,7 @@ If no arguments provided, show all tasks.
 
 ## Procedure
 
-1. Read every `*.md` file in `.openstation/tasks/` (skip subdirectories that are
+1. Read every `*.md` file in `tasks/` (skip subdirectories that are
    artifact folders).
 2. Parse YAML frontmatter from each file.
 3. Apply any filters from `$ARGUMENTS`.

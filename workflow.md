@@ -57,13 +57,13 @@ A task may be decomposed into sub-tasks:
 
 Artifacts are outputs produced during task execution (research
 notes, code, reports, etc.). Store them alongside the task in
-`.openstation/tasks/`:
+`tasks/`:
 
 - **Single artifact**: same ID prefix as the task.
-  `.openstation/tasks/0003-my-task-notes.md`
+  `tasks/0003-my-task-notes.md`
 - **Multiple artifacts**: subdirectory named after the task.
   ```
-  .openstation/tasks/0003-my-task/
+  tasks/0003-my-task/
   ├── 0003-my-task.md      # task spec
   ├── research-notes.md    # artifact
   └── implementation.md    # artifact
@@ -80,16 +80,16 @@ task spec from artifacts and moves each to its destination.
 
 | What | Destination |
 |------|-------------|
-| Task spec (always) | `.openstation/archive/tasks/` |
-| Artifacts from `researcher` | `.openstation/research/` |
-| Artifacts from other agents | `.openstation/specs/` |
-| No agent (no artifacts) | just `.openstation/archive/tasks/` |
+| Task spec (always) | `archive/tasks/` |
+| Artifacts from `researcher` | `research/` |
+| Artifacts from other agents | `specs/` |
+| No agent (no artifacts) | just `archive/tasks/` |
 
 ### Destination Manual
 
 Before moving an artifact to its destination, check for a
 `manual.md` in the destination directory (e.g.,
-`.openstation/specs/manual.md`). If it exists, follow its
+`specs/manual.md`). If it exists, follow its
 placement instructions. If it does not exist, move the
 artifact directly into the destination directory.
 
@@ -102,16 +102,15 @@ name.
 ## Directory Purposes
 
 ```
-.openstation/
-├── tasks/          — Active work only (backlog through review)
-├── agents/         — Agent specs (identity + skill references)
-├── skills/         — Skills (operational knowledge)
-├── specs/          — Promoted artifacts from non-researcher agents
-├── research/       — Promoted artifacts from researcher agent
-├── archive/tasks/  — Completed task specs (done)
-├── workflow.md     — This file (lifecycle rules)
-└── manual.md       — Work process agents follow
+tasks/          — Active work only (backlog through review)
+agents/         — Agent specs (identity + skill references)
+skills/         — Skills (operational knowledge)
+specs/          — Promoted artifacts from non-researcher agents
+research/       — Promoted artifacts from researcher agent
+archive/tasks/  — Completed task specs (done)
+workflow.md     — This file (lifecycle rules)
+manual.md       — Work process agents follow
 ```
 
-`.openstation/tasks/` should only contain active work. Completed
+`tasks/` should only contain active work. Completed
 tasks are archived via `/openstation.done`.

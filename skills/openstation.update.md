@@ -23,17 +23,17 @@ The task name can be either the full ID-prefixed name (e.g.,
 1. Parse the task name (first argument) and field:value pairs from
    `$ARGUMENTS`.
 2. Locate the task file:
-   - Try exact match: `.openstation/tasks/<task-name>.md`
-   - If not found, try glob fallback: `.openstation/tasks/*-<task-name>.md`
+   - Try exact match: `tasks/<task-name>.md`
+   - If not found, try glob fallback: `tasks/*-<task-name>.md`
    - If still not found, report an error and list available tasks.
 3. Read the current frontmatter.
 4. Validate each field:value pair:
-   - `status` must be a valid status per `.openstation/workflow.md`
+   - `status` must be a valid status per `workflow.md`
      (backlog, ready, in-progress, review, failed).
      **`status:done` is not allowed via update** — use
      `/openstation.done` instead, which sets the status and
      archives the task in one step. Reject with an error message.
-   - `agent` should match an agent in `.openstation/agents/` (warn if not found,
+   - `agent` should match an agent in `agents/` (warn if not found,
      but allow it)
    - `owner` should be an agent name or `manual` (warn if agent
      not found, but allow it)

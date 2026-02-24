@@ -20,7 +20,7 @@ skills, and documentation.
 - Create task specs with correct frontmatter and structure
 - Write agent specs that clearly define capabilities and constraints
 - Author skills that encode operational knowledge precisely
-- Update .openstation/manual.md and CLAUDE.md when conventions change
+- Update manual.md and CLAUDE.md when conventions change
 - Maintain cross-references and consistency across vault artifacts
 - Edit frontmatter fields without disturbing body content
 

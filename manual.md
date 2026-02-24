@@ -7,7 +7,7 @@ executing tasks within Open Station.
 
 1. Determine your agent name from your agent spec (the `name` field
    in your frontmatter).
-2. Scan all files in `.openstation/tasks/` for specs where `agent` matches your
+2. Scan all files in `tasks/` for specs where `agent` matches your
    name AND `status` is `ready`.
 3. If multiple ready tasks exist, pick the one with the earliest
    `created` date.
@@ -32,15 +32,15 @@ executing tasks within Open Station.
 
 ### 3. Store Artifacts
 
-- Store artifacts alongside the task in `.openstation/tasks/`.
-- See `.openstation/workflow.md` § "Artifact Storage" for naming
+- Store artifacts alongside the task in `tasks/`.
+- See `workflow.md` § "Artifact Storage" for naming
   conventions (single file vs subdirectory).
 
 ## Sub-Tasks
 
 If a task requires decomposition, use `/openstation.create` to
 create sub-tasks and set `parent: <current-task-name>` in their
-frontmatter. See `.openstation/workflow.md` § "Sub-Tasks" for
+frontmatter. See `workflow.md` § "Sub-Tasks" for
 blocking rules and lifecycle dependency.
 
 ## Completing a Task
@@ -53,7 +53,7 @@ After working through all requirements:
 3. Do **not** self-verify or set `done`/`failed` — that is the
    owner's responsibility.
 
-See `.openstation/workflow.md` for valid status transitions and
+See `workflow.md` for valid status transitions and
 ownership rules.
 
 ## Verifying a Task
@@ -86,12 +86,12 @@ If `owner` is `manual` (the default), a human operator:
 ## Completing & Archiving
 
 When a task passes verification, run `/openstation.done <task-name>`
-to mark it done and move it out of `.openstation/tasks/` in a single step. This
+to mark it done and move it out of `tasks/` in a single step. This
 keeps the directory as a clean active work queue.
 
 ### Routing Rules
 
-See `.openstation/workflow.md` § "Artifact Promotion" for the
+See `workflow.md` § "Artifact Promotion" for the
 routing table, ID prefix stripping, and destination rules.
 
 ## Updating Frontmatter
