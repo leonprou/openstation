@@ -31,7 +31,7 @@ architecture.
 - **Lifecycle rules** (`docs/lifecycle.md`) — Renamed from
   `workflow.md`. Deduplicated with task spec. Added symlink move
   procedure, artifact routing table, and directory purposes.
-- **Execute skill** (`skills/openstation.execute.md`) — Merged
+- **Execute skill** (`skills/openstation-execute/`) — Merged
   the standalone manual into the skill. Added Record Findings
   step, verification guardrails, and agent ownership rules.
 
@@ -91,7 +91,7 @@ and task lifecycle from scratch.
 
 - **Researcher agent** — Research-focused agent spec.
 - **Author agent** — Structured vault content authoring agent.
-- **Execute skill** (`openstation.execute.md`) — Agent playbook
+- **Execute skill** (`openstation-execute/`) — Agent playbook
   for task discovery, execution, artifact storage, and
   completion.
 - **Manual** (`docs/manual.md`) — Standalone agent operating

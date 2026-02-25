@@ -4,7 +4,7 @@ name: researcher
 description: Research agent for gathering, analyzing, and synthesizing information to support decision-making
 model: claude-sonnet-4-6
 skills:
-  - openstation.execute
+  - openstation-execute
 ---
 
 # Researcher

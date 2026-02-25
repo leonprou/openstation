@@ -6,7 +6,7 @@ description: >-
   task specs, agent specs, skills, and documentation.
 model: claude-sonnet-4-6
 skills:
-  - openstation.execute
+  - openstation-execute
 ---
 
 # Author

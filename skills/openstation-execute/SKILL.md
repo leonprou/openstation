@@ -1,6 +1,7 @@
 ---
-name: openstation.execute
-description: Teaches agents how to operate within Open Station — find tasks, execute work, update state, and store artifacts. Auto-loaded by agents with this skill in their frontmatter.
+name: openstation-execute
+description: Teaches agents how to operate within Open Station — find tasks, execute work, update state, and store artifacts.
+user-invocable: false
 ---
 
 # Open Station Executor

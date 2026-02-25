@@ -89,7 +89,7 @@ placed under `.openstation/`.
          ▼                  ▼
 ┌─────────────────────────────┐
 │  skills/                    │
-│  openstation.execute.md     │──► lifecycle.md
+│  openstation-execute/       │──► lifecycle.md
 └────────────────┬────────────┘    task.spec.md
                  │                 /openstation.create
       skills:    │                 /openstation.done

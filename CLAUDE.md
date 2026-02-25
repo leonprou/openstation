@@ -41,7 +41,7 @@ projects. In this source repo they live at the root.
          ▼                  ▼
 ┌─────────────────────────────┐
 │  skills/                    │
-│  openstation.execute.md     │──► lifecycle.md
+│  openstation-execute/       │──► lifecycle.md
 └────────────────┬────────────┘    task.spec.md
                  │                 /openstation.create
       skills:    │                 /openstation.done

@@ -20,7 +20,7 @@ COMMANDS=(
 )
 
 SKILLS=(
-  openstation.execute.md
+  openstation-execute
 )
 
 AGENTS=(
@@ -189,8 +189,9 @@ done
 printf 'Installing skills...\n'
 
 for skill in "${SKILLS[@]}"; do
-  fetch_file "skills/$skill" ".openstation/skills/$skill"
-  info ".openstation/skills/$skill"
+  ensure_dir ".openstation/skills/$skill"
+  fetch_file "skills/$skill/SKILL.md" ".openstation/skills/$skill/SKILL.md"
+  info ".openstation/skills/$skill/SKILL.md"
 done
 
 # --- Download docs (always overwrite — AS-owned) --------------------------
@@ -257,6 +258,31 @@ elif [[ -d ".claude/agents" ]]; then
 fi
 ln -s "../.openstation/agents" ".claude/agents"
 info ".claude/agents → ../.openstation/agents"
+
+# .claude/skills → ../.openstation/skills directory symlink
+if [[ -L ".claude/skills" ]]; then
+  rm ".claude/skills"
+elif [[ -d ".claude/skills" ]]; then
+  # Preserve any non-openstation skills
+  if [[ -n "$(ls -A .claude/skills/ 2>/dev/null)" ]]; then
+    warn ".claude/skills/ exists with files — merging openstation skills"
+    for skill in "${SKILLS[@]}"; do
+      target="../../.openstation/skills/$skill"
+      link=".claude/skills/$skill"
+      rm -rf "$link"
+      ln -s "$target" "$link"
+      info "$link → $target"
+    done
+  else
+    rm -rf ".claude/skills"
+    ln -s "../.openstation/skills" ".claude/skills"
+    info ".claude/skills → ../.openstation/skills"
+  fi
+fi
+if [[ ! -e ".claude/skills" ]]; then
+  ln -s "../.openstation/skills" ".claude/skills"
+  info ".claude/skills → ../.openstation/skills"
+fi
 
 # --- Update CLAUDE.md ----------------------------------------------------
 
