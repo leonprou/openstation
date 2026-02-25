@@ -8,13 +8,19 @@ REPO_NAME="openstation"
 BRANCH="main"
 BASE_URL="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}"
 
-SKILLS=(
+COMMANDS=(
   openstation.create.md
   openstation.dispatch.md
   openstation.done.md
-  openstation.execute.md
   openstation.list.md
+  openstation.ready.md
+  openstation.reject.md
+  openstation.show.md
   openstation.update.md
+)
+
+SKILLS=(
+  openstation.execute.md
 )
 
 AGENTS=(
@@ -44,7 +50,7 @@ Options:
   --help         Show this help message
 
 Examples:
-  curl -fsSL https://raw.githubusercontent.com/openstation/openstation/main/install.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/leonprou/openstation/main/install.sh | bash
   ./install.sh --local /path/to/openstation
   ./install.sh --no-agents
 USAGE
@@ -119,7 +125,7 @@ if [[ -n "$LOCAL_PATH" ]]; then
     err "Local path does not exist: $LOCAL_PATH"
     exit 1
   fi
-  if [[ ! -f "$LOCAL_PATH/manual.md" ]]; then
+  if [[ ! -f "$LOCAL_PATH/docs/lifecycle.md" ]]; then
     err "Local path does not look like an Open Station repo: $LOCAL_PATH"
     exit 1
   fi
@@ -136,18 +142,49 @@ fi
 
 printf 'Creating directories...\n'
 
-DIRS=(.openstation/tasks .openstation/agents .openstation/skills .openstation/specs .openstation/research .openstation/archive/tasks .claude/commands)
+DIRS=(
+  .openstation/docs
+  .openstation/tasks/backlog
+  .openstation/tasks/current
+  .openstation/tasks/done
+  .openstation/artifacts/tasks
+  .openstation/artifacts/research
+  .openstation/artifacts/specs
+  .openstation/agents
+  .openstation/skills
+  .openstation/commands
+  .claude
+)
 for dir in "${DIRS[@]}"; do
   ensure_dir "$dir"
 done
 
 # Add .gitkeep to content directories
-CONTENT_DIRS=(.openstation/tasks .openstation/agents .openstation/skills .openstation/specs .openstation/research .openstation/archive/tasks)
+CONTENT_DIRS=(
+  .openstation/tasks/backlog
+  .openstation/tasks/current
+  .openstation/tasks/done
+  .openstation/artifacts/tasks
+  .openstation/artifacts/research
+  .openstation/artifacts/specs
+  .openstation/agents
+  .openstation/skills
+  .openstation/commands
+)
 for dir in "${CONTENT_DIRS[@]}"; do
   ensure_gitkeep "$dir"
 done
 
-# --- Download skills (always overwrite — AS-owned) -----------------------
+# --- Download commands (always overwrite — AS-owned) ----------------------
+
+printf 'Installing commands...\n'
+
+for cmd in "${COMMANDS[@]}"; do
+  fetch_file "commands/$cmd" ".openstation/commands/$cmd"
+  info ".openstation/commands/$cmd"
+done
+
+# --- Download skills (always overwrite — AS-owned) ------------------------
 
 printf 'Installing skills...\n'
 
@@ -156,19 +193,15 @@ for skill in "${SKILLS[@]}"; do
   info ".openstation/skills/$skill"
 done
 
-# --- Download manual.md (always overwrite — AS-owned) --------------------
+# --- Download docs (always overwrite — AS-owned) --------------------------
 
-printf 'Installing manual...\n'
+printf 'Installing docs...\n'
 
-fetch_file "manual.md" ".openstation/manual.md"
-info ".openstation/manual.md"
+fetch_file "docs/lifecycle.md" ".openstation/docs/lifecycle.md"
+info ".openstation/docs/lifecycle.md"
 
-# --- Download workflow.md (always overwrite — AS-owned) -------------------
-
-printf 'Installing workflow...\n'
-
-fetch_file "workflow.md" ".openstation/workflow.md"
-info ".openstation/workflow.md"
+fetch_file "docs/task.spec.md" ".openstation/docs/task.spec.md"
+info ".openstation/docs/task.spec.md"
 
 # --- Download example agents (skip if exist) -----------------------------
 
@@ -191,14 +224,30 @@ fi
 
 printf 'Creating symlinks...\n'
 
-# Skill command symlinks
-for skill in "${SKILLS[@]}"; do
-  target="../../.openstation/skills/$skill"
-  link=".claude/commands/$skill"
-  rm -f "$link"
-  ln -s "$target" "$link"
-  info "$link → $target"
-done
+# .claude/commands → ../.openstation/commands directory symlink
+if [[ -L ".claude/commands" ]]; then
+  rm ".claude/commands"
+elif [[ -d ".claude/commands" ]]; then
+  # Preserve any non-openstation commands
+  if [[ -n "$(ls -A .claude/commands/ 2>/dev/null)" ]]; then
+    warn ".claude/commands/ exists with files — merging openstation commands"
+    for cmd in "${COMMANDS[@]}"; do
+      target="../../.openstation/commands/$cmd"
+      link=".claude/commands/$cmd"
+      rm -f "$link"
+      ln -s "$target" "$link"
+      info "$link → $target"
+    done
+  else
+    rm -rf ".claude/commands"
+    ln -s "../.openstation/commands" ".claude/commands"
+    info ".claude/commands → ../.openstation/commands"
+  fi
+fi
+if [[ ! -e ".claude/commands" ]]; then
+  ln -s "../.openstation/commands" ".claude/commands"
+  info ".claude/commands → ../.openstation/commands"
+fi
 
 # .claude/agents → ../.openstation/agents directory symlink
 if [[ -L ".claude/agents" ]]; then
@@ -213,7 +262,7 @@ info ".claude/agents → ../.openstation/agents"
 
 printf 'Updating CLAUDE.md...\n'
 
-# Write managed section to a temp file (avoids awk multiline issues)
+# Write managed section to a temp file
 section_file=$(mktemp)
 cat > "$section_file" <<'SECTION'
 <!-- openstation:start -->
@@ -226,14 +275,18 @@ markdown specs + skills, zero runtime dependencies.
 
 ```
 .openstation/
-├── tasks/           — Task specs (active work: backlog through review)
-├── agents/          — Agent specs (identity + skill references)
-├── skills/          — Open Station skills (operational knowledge)
-├── specs/           — Spec artifacts (from author and other agents)
-├── research/        — Research artifacts (from researcher)
-├── archive/tasks/   — Done task specs (all completed tasks)
-├── workflow.md      — Lifecycle rules (statuses, ownership, artifacts)
-└── manual.md        — Work process agents follow
+├── docs/              — Project documentation (lifecycle, task spec)
+├── tasks/             — Lifecycle buckets (contain symlinks)
+│   ├── backlog/       —   Not yet ready for agents
+│   ├── current/       —   Active work (ready → in-progress → review)
+│   └── done/          —   Completed tasks
+├── artifacts/         — Canonical artifact storage (source of truth)
+│   ├── tasks/         —   Task folders (canonical location, never move)
+│   ├── research/      —   Research outputs
+│   └── specs/         —   Specifications & designs
+├── agents/            — Agent specs (identity + skill references)
+├── skills/            — Agent skills (not user-invocable)
+└── commands/          — User-invocable slash commands
 ```
 
 ## Quick Start
@@ -244,8 +297,8 @@ Update a task:  `/openstation.update <name> field:value`
 Run an agent:   `claude --agent <name>`
 Complete task:  `/openstation.done <name>`
 
-See `.openstation/workflow.md` for lifecycle rules and
-`.openstation/manual.md` for the work process.
+See `.openstation/docs/lifecycle.md` for lifecycle rules and
+`.openstation/docs/task.spec.md` for task format.
 <!-- openstation:end -->
 SECTION
 
@@ -255,14 +308,7 @@ if [[ ! -f "CLAUDE.md" ]]; then
   info "Created CLAUDE.md with Open Station section"
 elif grep -q "$MARKER_START" "CLAUDE.md"; then
   # Replace existing managed section
-  awk '
-    /<!-- openstation:start -->/ { skip=1; next }
-    /<!-- openstation:end -->/   { skip=0; next }
-    !skip { print }
-  ' "CLAUDE.md" > "CLAUDE.md.tmp"
-  # Insert section at the position of removed content (or append)
-  # Simpler: rebuild file = content-before + section + content-after
-  awk -v sfile="'"$section_file"'" '
+  awk -v sfile="$section_file" '
     BEGIN { printing=1 }
     /<!-- openstation:start -->/ {
       while ((getline line < sfile) > 0) print line
@@ -287,7 +333,7 @@ rm -f "$section_file"
 
 printf '\n\033[1;32mOpen Station installed successfully!\033[0m\n\n'
 printf 'Next steps:\n'
-printf '  1. Review CLAUDE.md and .openstation/manual.md\n'
+printf '  1. Review CLAUDE.md and .openstation/docs/lifecycle.md\n'
 printf '  2. Customize agent specs in .openstation/agents/\n'
 printf '  3. Create your first task: /openstation.create <description>\n'
 printf '  4. Run an agent: claude --agent <name>\n\n'

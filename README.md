@@ -32,7 +32,7 @@ This creates the vault directories, installs skills and the manual, sets up syml
 **2. Set it ready**
 
 ```
-/openstation.update 0001-add-input-validation status:ready agent:researcher
+/openstation.ready 0001-add-input-validation agent:researcher
 ```
 
 **3. Dispatch an agent**
@@ -49,22 +49,72 @@ The agent finds its ready tasks, follows the manual, executes the work, and sets
 /openstation.done 0001-add-input-validation
 ```
 
-Archives the task spec and promotes artifacts to the correct destination.
+Moves the task symlink to `tasks/done/`.
 
 ## Vault Structure
 
 ```
-tasks/           — Task specs (active work: backlog through review)
-agents/          — Agent specs (identity + skill references)
-skills/          — Open Station skills (operational knowledge)
-specs/           — Spec artifacts (from author and other agents)
-research/        — Research artifacts (from researcher)
-archive/tasks/   — Done task specs (all completed tasks)
-manual.md        — Work process agents follow
+docs/              — Project documentation (lifecycle, task spec, README)
+tasks/             — Lifecycle buckets (contain symlinks, not real folders)
+  backlog/         —   Not yet ready for agents
+  current/         —   Active work (ready → in-progress → review)
+  done/            —   Completed tasks
+artifacts/         — Canonical artifact storage (source of truth)
+  tasks/           —   Task folders (canonical location, never move)
+  research/        —   Research outputs
+  specs/           —   Specifications & designs
+agents/            — Agent specs (identity + skill references)
+skills/            — Agent skills (not user-invocable)
+commands/          — User-invocable slash commands
 ```
 
 When installed into another project via `install.sh`, these are
 placed under `.openstation/`.
+
+## Architecture
+
+```
+                        ┌──────────┐
+                        │ CLAUDE.md│
+                        └────┬─────┘
+                             │
+                  references │
+             ┌───────────────┤
+             ▼               ▼
+      ┌────────────┐  ┌───────────┐
+      │lifecycle.md │◄─┤task.spec.md│
+      └──┬──────┬──┘  └───────────┘
+         │      │
+         │      └───────────┐
+         ▼                  ▼
+┌─────────────────────────────┐
+│  skills/                    │
+│  openstation.execute.md     │──► lifecycle.md
+└────────────────┬────────────┘    task.spec.md
+                 │                 /openstation.create
+      skills:    │                 /openstation.done
+      execute    │
+         ┌───────┴───────┐
+         ▼               ▼
+  ┌──────────┐    ┌──────────┐
+  │researcher│    │  author  │
+  └──────────┘    └──────────┘
+
+┌─────────────────────────────────────────┐
+│  commands/                               │
+│  openstation.create.md  ──► lifecycle.md │
+│  openstation.done.md    ──► lifecycle.md │
+│  openstation.update.md  ──► lifecycle.md │
+│  openstation.list.md                     │
+│  openstation.dispatch.md──► agents/      │
+└─────────────────────────────────────────┘
+```
+
+| Doc | Purpose |
+|-----|---------|
+| `task.spec.md` | The shape — schema, naming, format |
+| `lifecycle.md` | The state machine — transitions, ownership, artifacts |
+| `execute skill` | The agent playbook — discovery, execution, completion |
 
 ## Commands
 
@@ -72,10 +122,12 @@ placed under `.openstation/`.
 |---------|-------------|
 | `/openstation.create` | Create a new task spec from a description |
 | `/openstation.list` | List all tasks with status, agent, and dates |
+| `/openstation.show` | Show full details of a single task |
+| `/openstation.ready` | Promote a task from backlog to ready |
 | `/openstation.update` | Update task frontmatter fields |
+| `/openstation.done` | Mark a task done and move it to done/ |
+| `/openstation.reject` | Reject a task in review and mark it failed |
 | `/openstation.dispatch` | Preview agent details and show launch instructions |
-| `/openstation.done` | Mark a task done and archive it |
-| `/openstation.execute` | Agent skill — find tasks, follow the manual, store artifacts |
 
 ## License
 

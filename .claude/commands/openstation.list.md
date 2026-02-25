@@ -1,1 +1,0 @@
-../../skills/openstation.list.md
