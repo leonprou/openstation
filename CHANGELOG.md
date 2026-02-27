@@ -1,6 +1,50 @@
 # Changelog
 
-## v2
+## v0.2.1
+
+Unified artifact promotion flow. Agent specs now follow the same
+canonical-in-artifacts + symlink-for-discovery pattern as tasks.
+
+### Architecture
+
+- **Agent specs as artifacts** — Agent specs moved from `agents/`
+  to `artifacts/agents/` (canonical location). `agents/` now
+  contains discovery symlinks (`agents/X.md →
+  ../artifacts/agents/X.md`), matching the task symlink pattern.
+- **Agent promotion** — `/openstation.done` now promotes agent
+  specs by creating discovery symlinks in `agents/` for any
+  agent artifacts found in the completed task folder.
+
+### Agents
+
+- **Project manager agent** — New coordination agent for task
+  management, agent assignment, artifact oversight, docs
+  maintenance, and roadmap planning.
+
+### Docs & Skills
+
+- **Lifecycle** (`docs/lifecycle.md`) — Added agent row to
+  routing table, agent promotion section, updated directory
+  purposes.
+- **Task spec** (`docs/task.spec.md`) — Added canonical path
+  guidance for `artifacts:` field and task-folder symlink
+  traceability pattern.
+- **Execute skill** — Updated vault structure and artifact
+  routing with explicit agent/research/specs destinations.
+
+### Install
+
+- `install.sh` writes agents to `artifacts/agents/` and creates
+  discovery symlinks in `agents/`.
+- Added `artifacts/agents/` to managed directories.
+- Updated managed CLAUDE.md section.
+
+### Fix
+
+- Restructured execute skill to directory format for Claude Code
+  auto-loading (`skills/openstation-execute/SKILL.md`).
+
+## v0.2.0
 
 Major restructuring of the vault layout, specs, and lifecycle
 model. Tasks become first-class artifacts with a symlink-based
@@ -68,7 +112,7 @@ architecture.
 - Migrated all 10 existing tasks to `artifacts/tasks/` with
   symlinks in their respective buckets.
 
-## v1
+## v0.1.0
 
 Initial release. Built the core vault structure, agent model,
 and task lifecycle from scratch.
@@ -95,7 +139,7 @@ and task lifecycle from scratch.
   for task discovery, execution, artifact storage, and
   completion.
 - **Manual** (`docs/manual.md`) — Standalone agent operating
-  guide (later merged into execute skill in v2).
+  guide (later merged into execute skill in v0.2.0).
 
 ### Commands
 
@@ -118,7 +162,7 @@ and task lifecycle from scratch.
   structure, architecture diagram, and commands reference.
 - **Renamed** from "Agent Station" to "Open Station".
 
-### Design Artifacts (removed in v2)
+### Design Artifacts (removed in v0.2.0)
 
 - Initial design document, feature spec, implementation plan,
   data model, and research notes in `artifacts/specs/001-open-station/`.
