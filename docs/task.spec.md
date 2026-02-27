@@ -96,7 +96,7 @@ created: YYYY-MM-DD     # Required. Date the task was created.
 | `agent` | string | no | empty | Agent assigned to execute the task |
 | `owner` | string | yes | `user` | Who verifies: agent name or `user` |
 | `parent` | string | no | empty | Parent task name (for sub-tasks) |
-| `artifacts` | list | no | empty | Paths to artifacts produced by this task |
+| `artifacts` | list | no | empty | Canonical paths to artifacts produced by this task |
 | `created` | date | yes | — | ISO 8601 date (`YYYY-MM-DD`) |
 
 ### Status Values
@@ -112,6 +112,26 @@ created: YYYY-MM-DD     # Required. Date the task was created.
 
 See `docs/lifecycle.md` for valid transitions, ownership rules,
 sub-task lifecycle, and artifact routing.
+
+### Artifacts Field
+
+The `artifacts` list uses **canonical paths** — the permanent
+location in `artifacts/`, not discovery symlinks. Examples:
+
+- `artifacts/agents/project-manager.md` (not `agents/project-manager.md`)
+- `artifacts/research/obsidian-plugin-api.md` (not a symlink path)
+
+During execution, agents should also symlink artifacts into the
+task folder for traceability:
+
+```
+artifacts/tasks/0011-add-pm-agent/
+├── index.md
+└── project-manager.md → ../../agents/project-manager.md
+```
+
+This makes it easy to see what a task produced without parsing
+frontmatter.
 
 ## Body Structure
 

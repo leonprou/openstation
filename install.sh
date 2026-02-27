@@ -148,6 +148,7 @@ DIRS=(
   .openstation/tasks/current
   .openstation/tasks/done
   .openstation/artifacts/tasks
+  .openstation/artifacts/agents
   .openstation/artifacts/research
   .openstation/artifacts/specs
   .openstation/agents
@@ -165,6 +166,7 @@ CONTENT_DIRS=(
   .openstation/tasks/current
   .openstation/tasks/done
   .openstation/artifacts/tasks
+  .openstation/artifacts/agents
   .openstation/artifacts/research
   .openstation/artifacts/specs
   .openstation/agents
@@ -210,12 +212,22 @@ if [[ "$INSTALL_AGENTS" == true ]]; then
   printf 'Installing example agents...\n'
 
   for agent in "${AGENTS[@]}"; do
-    if [[ -f ".openstation/agents/$agent" ]]; then
-      skip ".openstation/agents/$agent"
+    if [[ -f ".openstation/artifacts/agents/$agent" ]]; then
+      skip ".openstation/artifacts/agents/$agent"
     else
-      fetch_file "agents/$agent" ".openstation/agents/$agent"
-      info ".openstation/agents/$agent"
+      fetch_file "artifacts/agents/$agent" ".openstation/artifacts/agents/$agent"
+      info ".openstation/artifacts/agents/$agent"
     fi
+    # Create discovery symlink in agents/
+    link=".openstation/agents/$agent"
+    target="../artifacts/agents/$agent"
+    if [[ -L "$link" ]]; then
+      rm "$link"
+    elif [[ -f "$link" ]]; then
+      rm "$link"
+    fi
+    ln -s "$target" "$link"
+    info "$link → $target"
   done
 else
   printf 'Skipping agent specs (--no-agents)\n'
@@ -308,9 +320,10 @@ markdown specs + skills, zero runtime dependencies.
 │   └── done/          —   Completed tasks
 ├── artifacts/         — Canonical artifact storage (source of truth)
 │   ├── tasks/         —   Task folders (canonical location, never move)
+│   ├── agents/        —   Agent specs (canonical location)
 │   ├── research/      —   Research outputs
 │   └── specs/         —   Specifications & designs
-├── agents/            — Agent specs (identity + skill references)
+├── agents/            — Agent discovery (symlinks → artifacts/agents/)
 ├── skills/            — Agent skills (not user-invocable)
 └── commands/          — User-invocable slash commands
 ```

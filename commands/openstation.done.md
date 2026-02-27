@@ -34,4 +34,8 @@ Example: `0003-research-obsidian-plugin-api` or
    `../../artifacts/tasks/<task-name>`.
 6. Artifacts are already in `artifacts/` — they do not need to
    be moved.
-7. Confirm the task was completed and show the new path.
+7. Check the task folder for symlinks pointing to
+   `artifacts/agents/`. For each, create a discovery symlink:
+   `agents/<name>.md → ../artifacts/agents/<name>.md`
+   (skip if already exists).
+8. Confirm the task was completed and show the new path.

@@ -13,9 +13,10 @@ tasks/             — Lifecycle buckets (contain symlinks, not real folders)
   done/            —   Completed tasks
 artifacts/         — Canonical artifact storage (source of truth)
   tasks/           —   Task folders (canonical location, never move)
+  agents/          —   Agent specs (canonical location)
   research/        —   Research outputs
   specs/           —   Specifications & designs
-agents/            — Agent specs (identity + skill references)
+agents/            — Agent discovery (symlinks → artifacts/agents/)
 skills/            — Agent skills (operational knowledge, not user-invocable)
 commands/          — User-invocable slash commands
 ```

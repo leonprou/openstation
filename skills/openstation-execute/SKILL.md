@@ -19,9 +19,10 @@ tasks/             — Lifecycle buckets (contain symlinks, not real folders)
   done/            —   Completed tasks
 artifacts/         — Canonical artifact storage (source of truth)
   tasks/           —   Task folders (canonical location, never move)
+  agents/          —   Agent specs (canonical location)
   research/        —   Research outputs
   specs/           —   Specifications & designs
-agents/            — Agent specs (agent definitions)
+agents/            — Agent discovery (symlinks → artifacts/agents/)
 skills/            — Skills (including this one)
 commands/          — User-invocable slash commands
 ```
@@ -62,7 +63,12 @@ Reads through symlinks are transparent — no special handling needed.
 ### 3. Store Artifacts
 
 - Store artifacts in `artifacts/<category>/` (the canonical
-  location).
+  location). Routing:
+  - Agent specs → `artifacts/agents/`
+  - Research outputs → `artifacts/research/`
+  - Other outputs → `artifacts/specs/`
+- Symlink artifacts into the task folder for traceability:
+  `artifacts/tasks/NNNN-slug/<name>.md → ../../agents/<name>.md`
 - See `docs/lifecycle.md` § "Artifact Storage" for naming
   conventions and categories.
 

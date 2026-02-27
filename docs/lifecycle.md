@@ -75,6 +75,7 @@ Artifacts are outputs produced during task execution (research
 notes, code, reports, etc.). Store them in `artifacts/<category>/`:
 
 - `artifacts/tasks/` — Task folders (canonical location for all tasks)
+- `artifacts/agents/` — Agent specs (canonical location)
 - `artifacts/research/` — Research outputs (from researcher agent)
 - `artifacts/specs/` — Specifications and designs
 - Additional categories can be added as needed
@@ -94,7 +95,18 @@ task folder to `tasks/done/`. Artifacts are already in
 |---------------|-------------|
 | task creation | `artifacts/tasks/` |
 | `researcher` output | `artifacts/research/` |
+| agent spec | `artifacts/agents/` |
 | other agent output | `artifacts/specs/` |
+
+### Agent Promotion
+
+When a task produces an agent spec in `artifacts/agents/`,
+`/openstation.done` creates a discovery symlink:
+
+    agents/<name>.md → ../artifacts/agents/<name>.md
+
+This makes the agent available via `claude --agent <name>`
+without moving the canonical file.
 
 ## Directory Purposes
 
@@ -106,9 +118,10 @@ tasks/             — Lifecycle buckets (contain symlinks, not real folders)
   done/            —   Completed tasks
 artifacts/         — Canonical artifact storage (source of truth)
   tasks/           —   Task folders (canonical location, never move)
+  agents/          —   Agent specs (canonical location)
   research/        —   Research outputs
   specs/           —   Specifications & designs
-agents/            — Agent specs (identity + skill references)
+agents/            — Agent discovery (symlinks → artifacts/agents/)
 skills/            — Agent skills (not user-invocable)
 commands/          — User-invocable slash commands
 docs/lifecycle.md  — This file (lifecycle rules)
